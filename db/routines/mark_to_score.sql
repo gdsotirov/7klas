@@ -1,0 +1,20 @@
+DELIMITER /
+
+CREATE FUNCTION mark_to_score(mark INT)
+  RETURNS INT(2)
+  DETERMINISTIC
+BEGIN
+  DECLARE score INT(2);
+
+  SET score := CASE mark
+    WHEN 6 THEN 50
+    WHEN 5 THEN 39
+    WHEN 4 THEN 26
+    WHEN 3 THEN 15
+    ELSE 0
+  END;
+
+  RETURN score;
+END /
+
+DELIMITER ;
