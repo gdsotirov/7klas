@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `7klas`.`subj_marks` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `student_id` INT(11) NOT NULL,
   `subject_id` VARCHAR(5) NOT NULL,
-  `mark` INT(1) NOT NULL,
+  `mark` INT(1) NOT NULL CONSTRAINT mark_check CHECK (mark >= 2 AND mark <= 6),
   PRIMARY KEY (`id`),
   INDEX `fk_sm_student_idx` (`student_id` ASC) VISIBLE,
   INDEX `fk_sm_subject_idx` (`subject_id` ASC) VISIBLE,

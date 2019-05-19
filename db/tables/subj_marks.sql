@@ -2,7 +2,7 @@ CREATE TABLE subj_marks (
   id          INT         NOT NULL AUTO_INCREMENT,
   student_id  INT         NOT NULL,
   subject_id  VARCHAR(5)  NOT NULL,
-  mark        INT(1)      NOT NULL,
+  mark        INT(1)      NOT NULL CONSTRAINT mark_check CHECK (mark >= 2 AND mark <= 6),
 
   PRIMARY KEY (id),
 
