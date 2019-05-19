@@ -12,12 +12,12 @@ CREATE TABLE subj_marks (
   CONSTRAINT fk_sm_student
     FOREIGN KEY (student_id)
     REFERENCES students (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
   CONSTRAINT fk_sm_subject
     FOREIGN KEY (subject_id)
     REFERENCES subjects (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE
 )
 ENGINE = InnoDB;
