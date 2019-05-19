@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS class_ranks (
+CREATE TABLE class_ranks (
   id          INT           NOT NULL AUTO_INCREMENT,
   class_id    INT           NOT NULL,
   yr          YEAR          NOT NULL,
