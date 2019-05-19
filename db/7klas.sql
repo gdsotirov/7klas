@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `7klas`.`classes` (
   `id` INT(8) NOT NULL,
   `name` VARCHAR(64) NOT NULL,
   `numcl` INT(1) NOT NULL COMMENT 'Number of classes',
-  `yr` YEAR NOT NULL 
+  `yr` YEAR NOT NULL,
   `coef_bel` INT(1) NOT NULL COMMENT 'Coeficient for BEL result',
   `coef_mat` VARCHAR(45) NOT NULL COMMENT 'Coeficient for MAT result',
   `subj1_id` VARCHAR(5) NOT NULL COMMENT 'Subject 1',
@@ -121,6 +121,24 @@ CREATE TABLE IF NOT EXISTS `7klas`.`subj_marks` (
   CONSTRAINT `fk_sm_subject`
     FOREIGN KEY (`subject_id`)
     REFERENCES `7klas`.`subjects` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `7klas`.`class_rankings` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `class_id` INT(11) NOT NULL,
+  `yr` YEAR NOT NULL,
+  `min_rank_I` DECIMAL(5,2) NOT NULL COMMENT 'Minimal rank from Ist ranking',
+  `min_rank_II` DECIMAL(5,2) NOT NULL COMMENT 'Minimal rank from IInd ranking',
+  `max_rank_I` DECIMAL(5,2) NOT NULL COMMENT 'Maximal rank from Ist ranking',
+  `max_rank_II` VARCHAR(45) NOT NULL COMMENT 'Maximal rank from IInd ranking',
+  PRIMARY KEY (`id`),
+  INDEX `fk_cr_class_idx` (`class_id` ASC) VISIBLE,
+  CONSTRAINT `fk_cr_class`
+    FOREIGN KEY (`class_id`)
+    REFERENCES `7klas2`.`classes` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB
