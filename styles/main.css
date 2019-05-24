@@ -1,0 +1,88 @@
+/* 7klas Application styles */
+
+@media screen {
+  body {
+    font-family: Verdana, sans-serif;
+    font-size: 1em;
+  }
+
+  button {
+    background-color: #33f !important;
+    border: none;
+    color: #fff !important;
+    cursor: pointer;
+    font: inherit;
+    padding: 8px 16px;
+    vertical-align: middle;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
+  }
+
+  button:disabled:hover {
+    box-shadow: none;
+  }
+
+  button:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+
+  input {
+    display: block;
+  }
+
+  h1, h2, h3 {
+    font-weight: 400;
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 10px 0;
+  }
+
+  h1 {
+    font-size: 2.5em;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 1.8em;
+  }
+
+  h3 {
+    font-size: 1.5em;
+  }
+
+  p.copy {
+    text-align: center;
+    font-style: italic;
+  }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+  }
+
+  td, th {
+    padding: 8px 8px;
+  }
+
+  td {
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  tr:first-child {
+    background-color: #9ff;
+  }
+
+  tr:nth-child(2n) {
+    background-color: #cff;
+  }
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="bg">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Къде след 7 клас?</title>
+<meta name="author" content="Георги Д. Сотиров &lt;gdsotirov@gmail.com&gt;">
+<meta name="description" content="Къде след 7 клас показва възможното класирне на ученика след 7 клас">
+<meta name="keywords" content="класиране, 7 клас, бал">
+<meta name="robots" content="INDEX, FOLLOW">
+<meta name="robots" content="NOARCHIVE">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
+<link rel="stylesheet" href="styles/main.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+<script src="js/7klas_app.js"></script>
+<script src="js/7klas_ctrl.js"></script>
+</head>
+
+<body ng-app="7klas_app" ng-controller="7klas_ctrl">
+<h1>Къде след 7 клас?</h1>
+<p>Къде след 7 клас показва възможното класиране на ученика след 7 клас въз
+основа на информация за балообразуващите оценки и резултатите от
+<abbr title="Национално Външно Оценяване">НВО</abbr> по
+<abbr title="Български Език и Литература">БЕЛ</abbr> и Математика
+съпоставени към класацията по минимален бал на прием на училищата в
+София-град за учебната 2018/2019 година.</p>
+
+<div>
+
+<button ng-click="addStudent()">&#9998; Добавяне на ученик</button>
+
+<form ng-hide="hideform">
+<h2 ng-show="edit">Данни за ученика</h2>
+<label for="stName">Име:</label>
+<input id="stName" type="text" ng-model="stName" ng-disabled="!edit" placeholder="Име">
+<br>
+<label for="stNEABEL">Резултат от <abbr title="Национално Външно Оценяване">НВО</abbr> по
+<abbr title="Български Език и Литература">БЕЛ</abbr>:</label>
+<input id="stNEABEL" type="text" ng-model="stNEABEL" placeholder="Брой точки (от 0 до 100)">
+<br>
+<label for="stNEAMAT">Резултат от <abbr title="Национално Външно Оценяване">НВО</abbr> по Математика:</label>
+<input id="stNEAMAT" type="test" ng-model="stNEAMAT" placeholder="Брой точки (от 0 до 100)">
+<br>
+<button ng-click="rankStudent()" ng-disabled="error || incomplete">&#10004; Класирай</button>
+</form>
+
+<h2>Класиране по минимален бал</h2>
+
+<table>
+  <tr>
+    <th>Училище</th>
+    <th>Паралелка</th>
+    <th>Минимален бал I класиране</th>
+    <th>Минимален бал II класиране</th>
+  </tr>
+  <tr ng-repeat="clrnk in cls_rnks">
+    <td>{{ clrnk.schlName }}</td>
+    <td>{{ clrnk.clsName  }}</td>
+    <td>{{ clrnk.min_rank_I  | number : 2 }}</td>
+    <td>{{ clrnk.min_rank_II | number : 2 }}</td>
+  </tr>
+</table>
+
+<p><strong>Внимание</strong>: Това приложение и информацията в него са
+предоставени с цел да бъдат полезни. Класирането на ученика може да служи
+само и единствено за справка.</p>
+
+</div>
+
+<footer>
+<hr />
+<p class="copy">Автор &copy; 2019 Георги Д. Сотиров</p>
+</footer>
+
+</body>
+
+</html>
