@@ -1,5 +1,5 @@
 -- MySQL Workbench Synchronization
--- Generated: 2019-05-18 22:45
+-- Generated: 2019-05-24 21:43
 -- Model: New Model
 -- Version: 1.0
 -- Project: Name of the project
@@ -138,12 +138,59 @@ CREATE TABLE IF NOT EXISTS `7klas`.`class_rankings` (
   INDEX `fk_cr_class_idx` (`class_id` ASC) VISIBLE,
   CONSTRAINT `fk_cr_class`
     FOREIGN KEY (`class_id`)
-    REFERENCES `7klas2`.`classes` (`id`)
+    REFERENCES `7klas`.`classes` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+-- -----------------------------------------------------
+-- Placeholder table for view `7klas`.`ClassRanks`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `7klas`.`ClassRanks` (`schlName` INT, `clsName` INT, `min_rank_I` INT, `min_rank_II` INT);
+
+-- -----------------------------------------------------
+-- Placeholder table for view `7klas`.`ClassRanksJSON`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `7klas`.`ClassRanksJSON` (`json_obj` INT);
+
+
+USE `test`;
+
+-- -----------------------------------------------------
+-- View `7klas`.`ClassRanks`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `7klas`.`ClassRanks`;
+USE `test`;
+CREATE  OR REPLACE VIEW ClassRanks AS
+SELECT CONCAT(SC.id, ' ', SC.short_name) schlName,
+       CONCAT(SUBSTR(CONVERT(CL.id, CHAR), 5), ' ', CL.`name`)     clsName,
+       CR.min_rank_I,
+       CR.min_rank_II
+  FROM classes        CL,
+       class_rankings CR,
+       schools        SC
+ WHERE CR.class_id = CL.id
+   AND CL.school_id = SC.id
+   AND CL.yr = YEAR(CURDATE())
+   AND CR.yr = YEAR(CURDATE()) - 1
+ ORDER BY CR.min_rank_II DESC;
+
+
+USE `test`;
+
+-- -----------------------------------------------------
+-- View `7klas`.`ClassRanksJSON`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `7klas`.`ClassRanksJSON`;
+USE `test`;
+CREATE  OR REPLACE VIEW ClassRanksJSON AS
+SELECT JSON_OBJECT("schlName"	, schlName,
+                       "clsName" 	, clsName,
+                       "min_rank_I"	, min_rank_I,
+                       "min_rank_II", min_rank_II
+                      ) json_obj
+  FROM ClassRanks;
 
 DELIMITER $$
 USE `7klas`$$
