@@ -37,24 +37,25 @@
 <h2 ng-show="edit">Данни за ученика</h2>
 
 <label for="stName">Име:</label>
-<input id="stName" type="text" ng-model="stName" ng-disabled="!edit" placeholder="Име">
+<input id="stName" type="text" ng-model="stName" ng-disabled="!edit"
+maxlength="64" size="32" placeholder="Име">
 <br>
 
 <label for="stNEABEL">Резултат от <abbr title="Национално Външно Оценяване">НВО</abbr> по
 <abbr title="Български Език и Литература">БЕЛ</abbr>:</label>
-<input id="stNEABEL" type="text" ng-model="stNEABEL" placeholder="Брой точки (от 0 до 100)">
+<input id="stNEABEL" type="text" ng-model="stNEABEL" size="16" placeholder="от 0.0 до 100.00">
 <br>
 
 <label for="stNEAMAT">Резултат от <abbr title="Национално Външно Оценяване">НВО</abbr> по Математика:</label>
-<input id="stNEAMAT" type="text" ng-model="stNEAMAT" placeholder="Брой точки (от 0 до 100)">
+<input id="stNEAMAT" type="text" ng-model="stNEAMAT" size="16" placeholder="от 0.0 до 100.00">
 <br>
 
 <label for="stSubj1">Оценка предмет №1:</label>
-<input id="stSubj1" type="text" ng-model="stSubj1" placeholder="Оценка (от 2 до 6)">
+<input id="stSubj1" type="number" ng-model="stSubj1" min="3" max="6" placeholder="от 2 до 6">
 <br>
 
 <label for="stSubj2">Оценка предмет №2:</label>
-<input id="stSubj2" type="text" ng-model="stSubj2" placeholder="Оценка (от 2 до 6)">
+<input id="stSubj2" type="number" ng-model="stSubj2" min="3" max="6" placeholder="от 2 до 6">
 <br>
 
 <label for="stRank">Бал:</label>
