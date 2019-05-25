@@ -6,6 +6,10 @@
     font-size: 1em;
   }
 
+  br {
+    clear: both;
+  }
+
   button {
     background-color: #33f !important;
     border: none;
@@ -29,19 +33,32 @@
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
   }
 
+  div.buttons {
+    clear: both;
+    text-align: center;
+  }
+
   input {
+    float: left;
+    font: inherit;
     display: block;
+    margin: 0.5em;
+    text-align: left;
+  }
+
+  input.rank {
+    border: none;
   }
 
   h1, h2, h3 {
     font-weight: 400;
     font-family: "Segoe UI", Arial, sans-serif;
     margin: 10px 0;
+    text-align: center;
   }
 
   h1 {
     font-size: 2.5em;
-    text-align: center;
   }
 
   h2 {
@@ -50,6 +67,14 @@
 
   h3 {
     font-size: 1.5em;
+  }
+
+  label {
+    display: block;
+    float: left;
+    margin: 0.5em;
+    text-align: right;
+    width: 50%;
   }
 
   p.copy {
