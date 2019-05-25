@@ -39,6 +39,10 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
     $scope.hideform = true;
   };
 
+  $scope.cancel = function() {
+    $scope.hideform = true;
+  };
+
   /* Verify user input */
   $scope.verify = function() {
     /* Name should have value */
