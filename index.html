@@ -14,7 +14,6 @@
 <!--<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
 <link rel="stylesheet" href="styles/main.css">
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
 <script src="js/7klas_app.js"></script>
 <script src="js/7klas_ctrl.js"></script>
 </head>
@@ -30,22 +29,41 @@
 
 <div>
 
+<div class="buttons">
 <button ng-click="addStudent()">&#9998; Добавяне на ученик</button>
+</div>
 
 <form ng-hide="hideform">
 <h2 ng-show="edit">Данни за ученика</h2>
+
 <label for="stName">Име:</label>
 <input id="stName" type="text" ng-model="stName" ng-disabled="!edit" placeholder="Име">
 <br>
+
 <label for="stNEABEL">Резултат от <abbr title="Национално Външно Оценяване">НВО</abbr> по
 <abbr title="Български Език и Литература">БЕЛ</abbr>:</label>
 <input id="stNEABEL" type="text" ng-model="stNEABEL" placeholder="Брой точки (от 0 до 100)">
 <br>
+
 <label for="stNEAMAT">Резултат от <abbr title="Национално Външно Оценяване">НВО</abbr> по Математика:</label>
-<input id="stNEAMAT" type="test" ng-model="stNEAMAT" placeholder="Брой точки (от 0 до 100)">
+<input id="stNEAMAT" type="text" ng-model="stNEAMAT" placeholder="Брой точки (от 0 до 100)">
 <br>
+
+<label for="stSubj1">Оценка предмет №1:</label>
+<input id="stSubj1" type="text" ng-model="stSubj1" placeholder="Оценка (от 2 до 6)">
+<br>
+
+<label for="stSubj2">Оценка предмет №2:</label>
+<input id="stSubj2" type="text" ng-model="stSubj2" placeholder="Оценка (от 2 до 6)">
+<br>
+
+<label for="stRank">Бал:</label>
+<input class="rank" id="stRank" type="text" ng-model="stRank" disabled="disabled">
+
+<div class="buttons">
 <button ng-click="rankStudent()" ng-disabled="error || incomplete">&#10004; Класирай</button>
-<button ng-click="cancel()">&#10004; Отказ</button>
+<button ng-click="cancel()">&#128473; Отказ</button>
+</div>
 </form>
 
 <h2>Класиране по минимален бал</h2>
