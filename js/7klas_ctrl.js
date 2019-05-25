@@ -6,13 +6,27 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
   $scope.stNEAMAT = '';
 
   $scope.cls_rnks == '';
-  /*$scope.cls_rnks = [
-    {id:1, schlName:'Училище 1', clsName:"Клас А", min_rank_I:456, min_rank_II:432 },
-    {id:2, schlName:'Училище 2', clsName:"Клас Б", min_rank_I:321, min_rank_II:123 }
-  ];*/
+  /* For running locally
+    $scope.cls_rnks = [
+    {schlName:'Училище 1', clsName:"Клас А", min_rank_I:456, min_rank_II:432 },
+    {schlName:'Училище 2', clsName:"Клас Б", min_rank_I:321, min_rank_II:123 }
+  ];
 
-  $http.get("get_ranks.php")
-    .then(function (response) {$scope.cls_rnks = response.data;});
+  var $num = 0;
+  angular.forEach($scope.cls_rnks, function(item) {
+    item.number = ++$num;
+  });*/
+
+  $http.get("get_ranks.php").then(function (response) {
+      /* Number rows here, because in MySQL 5.7 Window functions (e.g.
+       * ROW_NUMBER) is not available.
+       */
+      var $num = 0;
+      $scope.cls_rnks = response.data;
+      angular.forEach($scope.cls_rnks, function(item) {
+        item.number = ++$num;
+      });
+  });
 
   $scope.edit = true;
   $scope.error = false;

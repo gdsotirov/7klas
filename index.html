@@ -52,12 +52,14 @@
 
 <table>
   <tr>
+    <th>№</th>
     <th>Училище</th>
     <th>Паралелка</th>
     <th>Минимален бал I класиране</th>
     <th>Минимален бал II класиране</th>
   </tr>
   <tr ng-repeat="clrnk in cls_rnks">
+    <td>{{ clrnk.number   }}</td>
     <td>{{ clrnk.schlName }}</td>
     <td>{{ clrnk.clsName  }}</td>
     <td>{{ clrnk.min_rank_I  | number : 2 }}</td>
