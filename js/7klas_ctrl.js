@@ -42,12 +42,12 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
     $scope.edit = true;
 
     $scope.incomplete = true;
-    if ($scope.edit            &&
-        $scope.stName.length   &&
-        $scope.stNEABEL.length &&
-        $scope.stNEAMAT.length &&
-        $scope.stSubj1.length  &&
-        $scope.stSubj2.length
+    if ($scope.edit             &&
+        $scope.stName.length    &&
+        $scope.stNEABEL.length  &&
+        $scope.stNEAMAT.length  &&
+        $scope.stSubj1 !== null &&
+        $scope.stSubj2 !== null
        )
     {
       $scope.incomplete = false;
@@ -67,6 +67,7 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
   };
 
   $scope.calcRank = function(bel, mat, subj1, subj2) {
+    /* TODO: These multipliers should come from user input */
     var rank = (1 * bel) + (3 * mat) +
                $scope.mark_to_score(subj1) + $scope.mark_to_score(subj2);
     return rank;
@@ -88,21 +89,7 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
       scMAT = parseFloat($scope.stNEAMAT);
     }
 
-    if ( $scope.stSubj1 == '' || isNaN($scope.stSubj1) ) {
-      scS1 = 0;
-    }
-    else {
-      scS1 = parseInt($scope.stSubj1);
-    }
-
-    if ( $scope.stSubj2 == '' || isNaN($scope.stSubj2) ) {
-      scS2 = 0;
-    }
-    else {
-      scS2 = parseInt($scope.stSubj2);
-    }
-
-    $scope.stRank = $scope.calcRank(scBEL, scMAT, scS1, scS2);
+    $scope.stRank = $scope.calcRank(scBEL, scMAT, $scope.stSubj1, $scope.stSubj2);
   }
 
   $scope.rankStudent = function() {
@@ -149,43 +136,40 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
 
   /* Verify user input */
   $scope.verify = function() {
+    $scope.error = false;
     /* Name should have value */
     if ( $scope.stName == "" ) {
       $scope.error = true;
     }
-    else { $scope.error = false; }
 
     /* Score should be between 0 and 100 */
-    if ( parseFloat($scope.stNEABEL) < 0 || parseFloat($scope.stNEABEL) > 100 ) {
+    if ( parseFloat($scope.stNEABEL) < 0.0 || parseFloat($scope.stNEABEL) > 100.0 ) {
+      document.getElementById('stNEABEL').setAttribute('invalid', true);
       $scope.error = true;
     }
-    else { $scope.error = false; }
 
     /* Score should be between 0 and 100 */
-    if ( parseFloat($scope.stNEAMAT) < 0 || parseFloat($scope.stNEAMAT) > 100 ) {
+    if ( parseFloat($scope.stNEAMAT) < 0.0 || parseFloat($scope.stNEAMAT) > 100.0 ) {
       $scope.error = true;
     }
-    else { $scope.error = false; }
 
     /* Mark is between 3 and 6 */
-    if ( parseInt($scope.stSubj1) < 3 || parseInt($scope.stSubj1) > 6 ) {
+    if ( $scope.stSubj1 < 3 || $scope.stSubj1 > 6 ) {
       $scope.error = true;
     }
-    else { $scope.error = false; }
 
     /* Mark i between 3 and 6 */
-    if ( parseInt($scope.stSubj2) < 3 || parseInt($scope.stSubj2) > 6 ) {
+    if ( $scope.stSubj2 < 3 || $scope.stSubj2 > 6 ) {
       $scope.error = true;
     }
-    else { $scope.error = false; }
 
     $scope.incomplete = false;
     if ( $scope.edit             &&
         (!$scope.stName.length   ||
          !$scope.stNEABEL.length ||
          !$scope.stNEAMAT.length ||
-         !$scope.stSubj1.length  ||
-         !$scope.stSubj2.length
+         $scope.stSubj1 == null  ||
+         $scope.stSubj2 == null
         )
        )
     {
