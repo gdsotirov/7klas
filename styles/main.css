@@ -47,6 +47,7 @@
   }
 
   input.rank {
+    background-color: inherit;
     border: none;
   }
 
