@@ -44,22 +44,26 @@ maxlength="64" size="32" placeholder="Име">
 <label for="stNEABEL">Резултат от <abbr title="Национално Външно Оценяване">НВО</abbr> по
 <abbr title="Български Език и Литература">БЕЛ</abbr>:</label>
 <input id="stNEABEL" type="text" ng-model="stNEABEL" size="16" placeholder="от 0.0 до 100.00">
+<input id="stNEABEL_mul" type="range" ng-model="stNEABEL_mul" ng-change="mul_change_bel()" min="1" max="3">
+<input class="res" type="text" ng-model="stNEABEL_mul" disabled="disabled">
 <br>
 
 <label for="stNEAMAT">Резултат от <abbr title="Национално Външно Оценяване">НВО</abbr> по Математика:</label>
 <input id="stNEAMAT" type="text" ng-model="stNEAMAT" size="16" placeholder="от 0.0 до 100.00">
+<input id="stNEAMAT_mul" type="range" ng-model="stNEAMAT_mul" ng-change="mul_change_mat()" min="1" max="3">
+<input class="res" type="text" ng-model="stNEAMAT_mul" disabled="disabled">
 <br>
 
 <label for="stSubj1">Оценка предмет №1:</label>
-<input id="stSubj1" type="number" ng-model="stSubj1" min="3" max="6" placeholder="от 2 до 6">
+<input id="stSubj1" type="number" ng-model="stSubj1" min="3" max="6" placeholder="от 3 до 6">
 <br>
 
 <label for="stSubj2">Оценка предмет №2:</label>
-<input id="stSubj2" type="number" ng-model="stSubj2" min="3" max="6" placeholder="от 2 до 6">
+<input id="stSubj2" type="number" ng-model="stSubj2" min="3" max="6" placeholder="от 3 до 6">
 <br>
 
 <label for="stRank">Бал:</label>
-<input class="rank" id="stRank" type="text" ng-model="stRank" disabled="disabled">
+<input class="res" id="stRank" type="text" ng-model="stRank" disabled="disabled">
 
 <div class="buttons">
 <button ng-click="rankStudent()" ng-disabled="error || incomplete">&#10004; Класирай</button>

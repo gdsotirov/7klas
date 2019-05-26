@@ -3,6 +3,8 @@
 angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http) {
   $scope.stName = '';
   $scope.stNEABEL = '';
+  $scope.stNEABEL_mul = 1;
+  $scope.stNEAMAT_mul = 3;
   $scope.stNEAMAT = '';
   $scope.stSubj1 = '';
   $scope.stSubj2 = '';
@@ -66,15 +68,14 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
     return score;
   };
 
-  $scope.calcRank = function(bel, mat, subj1, subj2) {
-    /* TODO: These multipliers should come from user input */
-    var rank = (1 * bel) + (3 * mat) +
+  $scope.calcRank = function(bel, bmul, mat, mmul, subj1, subj2) {
+    var rank = (bmul * bel) + (mmul * mat) +
                $scope.mark_to_score(subj1) + $scope.mark_to_score(subj2);
     return rank;
   };
 
   $scope.showRank = function() {
-    var scBEL, scMAT, scS1, scS2;
+    var scBEL, scMAT;
     if ( $scope.stNEABEL == '' || isNaN($scope.stNEABEL) ) {
       scBEL = 0;
     }
@@ -89,7 +90,9 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
       scMAT = parseFloat($scope.stNEAMAT);
     }
 
-    $scope.stRank = $scope.calcRank(scBEL, scMAT, $scope.stSubj1, $scope.stSubj2);
+    $scope.stRank = $scope.calcRank(scBEL, $scope.stNEABEL_mul,
+                                    scMAT, $scope.stNEAMAT_mul,
+                                    $scope.stSubj1, $scope.stSubj2);
   }
 
   $scope.rankStudent = function() {
@@ -144,7 +147,6 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
 
     /* Score should be between 0 and 100 */
     if ( parseFloat($scope.stNEABEL) < 0.0 || parseFloat($scope.stNEABEL) > 100.0 ) {
-      document.getElementById('stNEABEL').setAttribute('invalid', true);
       $scope.error = true;
     }
 
@@ -176,6 +178,16 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
       $scope.incomplete = true;
     }
   };
+
+  $scope.mul_change_bel = function () {
+    $scope.stNEAMAT_mul = 4 - $scope.stNEABEL_mul;
+    $scope.showRank();
+  }
+
+  $scope.mul_change_mat = function () {
+    $scope.stNEABEL_mul = 4 - $scope.stNEAMAT_mul;
+    $scope.showRank();
+  }
 
   $scope.$watch('stName'  ,function() {$scope.verify();});
   $scope.$watch('stNEABEL',function() {$scope.verify(); $scope.showRank();});
