@@ -46,9 +46,13 @@
     text-align: left;
   }
 
-  input.rank {
+  input.res {
     background-color: inherit;
     border: none;
+  }
+
+  input[type=range] {
+    width: 5%;
   }
 
   h1, h2, h3 {
