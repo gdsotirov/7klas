@@ -30,6 +30,7 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
       $scope.cls_rnks = response.data;
       angular.forEach($scope.cls_rnks, function(item) {
         item.number = ++$num;
+        item.src = 'db';
       });
   });
 
@@ -114,6 +115,7 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
         student_ranked = true;
         new_item.number = ++num;
         new_item.clsName = item.clsName;
+        new_item.source = 'user';
         new_arr.push(new_item);
         item.number = ++num;
         new_arr.push(item);
@@ -187,6 +189,15 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
   $scope.mul_change_mat = function () {
     $scope.stNEABEL_mul = 4 - $scope.stNEAMAT_mul;
     $scope.showRank();
+  }
+
+  $scope.getItemStyle = function(itm) {
+    if ( itm.source == 'user' ) {
+      return "red";
+    }
+    else {
+      return "inherit";
+    }
   }
 
   $scope.$watch('stName'  ,function() {$scope.verify();});

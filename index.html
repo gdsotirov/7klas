@@ -81,7 +81,7 @@ maxlength="64" size="32" placeholder="Име">
     <th>Минимален бал I класиране</th>
     <th>Минимален бал II класиране</th>
   </tr>
-  <tr ng-repeat="clrnk in cls_rnks">
+  <tr ng-repeat="clrnk in cls_rnks" ng-style="{color: getItemStyle(clrnk) }">
     <td>{{ clrnk.number   }}</td>
     <td>{{ clrnk.schlName }}</td>
     <td>{{ clrnk.clsName  }}</td>
