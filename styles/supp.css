@@ -1,0 +1,23 @@
+/* 7klas Application supplementary styles */
+
+@media screen {
+  div.input-group span { margin: 0.3em }
+
+  h1, h2 {
+    text-align: center;
+  }
+
+  input[type=range] {
+    cursor: pointer;
+    width: 60%;
+  }
+
+  p {
+    text-align: justify;
+  }
+
+  p.copy {
+    text-align: center;
+    font-style: italic;
+  }
+}
