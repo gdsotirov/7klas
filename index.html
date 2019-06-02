@@ -12,68 +12,130 @@
 <meta name="robots" content="NOARCHIVE">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
-<link rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" title="Default" href="styles/main.css">
+<link rel="stylesheet" href="styles/supp.css">
+<link rel="alternate stylesheet" title="Bootstrap 3"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="alternate stylesheet" title="Bootstrap 4"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script src="js/7klas_app.js"></script>
 <script src="js/7klas_ctrl.js"></script>
 </head>
 
 <body ng-app="7klas_app" ng-controller="7klas_ctrl">
+
+<div class="container">
+
 <h1>Къде след 7 клас?</h1>
+
+<div class="row">
 <p>Къде след 7 клас показва възможното класиране на ученика след 7 клас въз
 основа на информация за балообразуващите оценки и резултатите от
 <abbr title="Национално Външно Оценяване">НВО</abbr> по
 <abbr title="Български Език и Литература">БЕЛ</abbr> и Математика
 съпоставени към класацията по минимален бал на прием на училищата в
 София-град за учебната 2018/2019 година.</p>
+</div>
 
-<div>
-
-<div class="buttons">
-<button ng-click="addStudent()">&#9998; Добавяне на ученик</button>
+<div class="row">
+<div class="col text-center">
+<button class="btn btn-primary" ng-click="addStudent()">&#10133; Добавяне на ученик</button>
+</div>
 </div>
 
 <form ng-hide="hideform">
+<div class="row">
+<div class="col">
 <h2 ng-show="edit">Данни за ученика</h2>
+</div>
+</div>
 
+<div class="row">
+<div class="col-6 text-right">
 <label for="stName">Име:</label>
+</div>
+<div class="col-6">
 <input id="stName" type="text" ng-model="stName" ng-disabled="!edit"
 maxlength="64" size="32" placeholder="Име">
-<br>
+</div>
+</div>
 
+<div class="row">
+<div class="col-6 text-right">
 <label for="stNEABEL">Резултат от <abbr title="Национално Външно Оценяване">НВО</abbr> по
 <abbr title="Български Език и Литература">БЕЛ</abbr>:</label>
-<input id="stNEABEL" type="text" ng-model="stNEABEL" size="16" placeholder="от 0.0 до 100.00">
+</div>
+<div class="col-2">
+<input id="stNEABEL" type="text" ng-model="stNEABEL" size="8" placeholder="0 до 100">
+</div>
+<div class="col-2">
 <input id="stNEABEL_mul" type="range" ng-model="stNEABEL_mul" ng-change="mul_change_bel()" min="1" max="3">
-<input class="res" type="text" ng-model="stNEABEL_mul" disabled="disabled">
-<br>
+</div>
+<div class="col-2 input-group">
+<span>x</span>
+<input class="form-control-plaintext" type="text" ng-model="stNEABEL_mul" size="2" disabled="disabled">
+</div>
+</div>
 
+<div class="row">
+<div class="col-6 text-right">
 <label for="stNEAMAT">Резултат от <abbr title="Национално Външно Оценяване">НВО</abbr> по Математика:</label>
-<input id="stNEAMAT" type="text" ng-model="stNEAMAT" size="16" placeholder="от 0.0 до 100.00">
+</div>
+<div class="col-2">
+<input id="stNEAMAT" type="text" ng-model="stNEAMAT" size="8" placeholder="0 до 100">
+</div>
+<div class="col-2">
 <input id="stNEAMAT_mul" type="range" ng-model="stNEAMAT_mul" ng-change="mul_change_mat()" min="1" max="3">
-<input class="res" type="text" ng-model="stNEAMAT_mul" disabled="disabled">
-<br>
+</div>
+<div class="col-2 input-group">
+<span>x</span>
+<input class="form-control-plaintext" type="text" ng-model="stNEAMAT_mul" size="2" disabled="disabled">
+</div>
+</div>
 
+<div class="row">
+<div class="col-6 text-right">
 <label for="stSubj1">Оценка предмет №1:</label>
+</div>
+<div class="col-6">
 <input id="stSubj1" type="number" ng-model="stSubj1" min="3" max="6" placeholder="от 3 до 6">
-<br>
+</div>
+</div>
 
+<div class="row">
+<div class="col-6 text-right">
 <label for="stSubj2">Оценка предмет №2:</label>
+</div>
+<div class="col-6">
 <input id="stSubj2" type="number" ng-model="stSubj2" min="3" max="6" placeholder="от 3 до 6">
-<br>
+</div>
+</div>
 
+<div class="row">
+<div class="col-6 text-right">
 <label for="stRank">Бал:</label>
-<input class="res" id="stRank" type="text" ng-model="stRank" disabled="disabled">
+</div>
+<div class="col-6">
+<input class="form-control-plaintext" id="stRank" type="text" ng-model="stRank" disabled="disabled">
+</div>
+</div>
 
-<div class="buttons">
-<button ng-click="rankStudent()" ng-disabled="error || incomplete">&#10004; Класирай</button>
-<button ng-click="cancel()">&#128473; Отказ</button>
+<div class="row">
+<div class="col text-center">
+<button class="btn btn-primary" ng-click="rankStudent()" ng-disabled="error || incomplete">&#10004; Класирай</button>
+<button class="btn btn-primary" ng-click="cancel()">&#10060; Отказ</button>
+</div>
 </div>
 </form>
 
+<div class="row">
+<div class="col">
 <h2>Класиране по минимален бал</h2>
+</div>
+</div>
 
-<table>
+<table class="table table-striped">
   <tr>
     <th>№</th>
     <th>Училище</th>
@@ -90,9 +152,13 @@ maxlength="64" size="32" placeholder="Име">
   </tr>
 </table>
 
+<div class="row">
+<div class="col"> 
 <p><strong>Внимание</strong>: Това приложение и информацията в него са
 предоставени с цел да бъдат полезни. Класирането на ученика може да служи
 само и единствено за справка.</p>
+</div>
+</div>
 
 </div>
 
