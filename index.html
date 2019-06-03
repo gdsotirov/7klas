@@ -25,9 +25,17 @@
 
 <body ng-app="7klas_app" ng-controller="7klas_ctrl">
 
+<nav class="navbar navbar-default navbar-expand bg-primary navbar-dark navbar-fixed-top fixed-top">
+<ul class="nav navbar-nav">
+<li class="nav-item"><a class="nav-link" href="#top">Начало</a></li>
+<li class="nav-item"><a class="nav-link" href="#ranking">Класиране</a></li>
+<li class="nav-item"><a class="nav-link" href="#about">Относно</a></li>
+</ul>
+</nav>
+
 <div class="container">
 
-<h1>Къде след 7 клас?</h1>
+<h1 id="top">Къде след 7 клас?</h1>
 
 <div class="row">
 <p>Къде след 7 клас показва възможното класиране на ученика след 7 клас въз
@@ -131,7 +139,7 @@ maxlength="64" size="32" placeholder="Име">
 
 <div class="row">
 <div class="col">
-<h2>Класиране по минимален бал</h2>
+<h2 id="ranking">Класиране по минимален бал</h2>
 </div>
 </div>
 
@@ -154,7 +162,7 @@ maxlength="64" size="32" placeholder="Име">
 
 <div class="row">
 <div class="col"> 
-<h2>Относно</h2>
+<h2 id="about">Относно</h2>
 <p>За информация относно <abbr title="Национално Външно Оценяване">НВО</abbr>
 моля посетете <a href="https://www.mon.bg/bg/100149" target="_blank">страницата
 на МОН</a>. Минималните балове са взети от страницата на

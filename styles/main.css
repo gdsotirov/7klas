@@ -32,6 +32,12 @@
 @media screen {
   * { box-sizing: border-box }
 
+  a.nav-link {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    text-decoration: none;
+  }
+
   body {
     font-family: Verdana, sans-serif;
     font-size: 1em;
@@ -76,6 +82,16 @@
   div.row::before { content: ""; display: table }
   div.row::after { content: ""; clear: both }
 
+  h1, h2 {
+    font-weight: 400;
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 10px 0;
+  }
+
+  h1 { font-size: 2.5em }
+  h2 { font-size: 1.8em }
+  h3 { font-size: 1.5em }
+
   input {
     font: inherit;
     display: inline-block;
@@ -87,19 +103,45 @@
     border: none;
   }
 
-  h1, h2 {
-    font-weight: 400;
-    font-family: "Segoe UI", Arial, sans-serif;
-    margin: 10px 0;
-  }
-
-  h1 { font-size: 2.5em }
-  h2 { font-size: 1.8em }
-  h3 { font-size: 1.5em }
-
   label {
     display: inline-block;
     margin: 0.3em;
+  }
+
+  li.nav-item {}
+
+  nav.bg-primary { background-color: #33f }
+
+  nav.navbar-dark a.nav-link { color: #fff }
+  nav.navbar-dark a.nav-link:hover { color: #fcf }
+
+  nav.navbar-expand a.nav-link {
+    display: block;
+    padding: 0.5rem 1rem;
+  }
+
+  nav.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    width: 100%;
+  }
+
+  nav.navbar-expand, nav.navbar-default { flex-flow: row nowrap }
+
+  nav.navbar-expand ul.navbar-nav {
+    flex-direction: row;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-left: 0;
+  }
+
+  nav.fixed-top, nav.navbar-fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
   }
 
   table, table.table, table.table-striped {
@@ -108,13 +150,9 @@
     width: 100%;
   }
 
-  td, th {
-    padding: 8px 8px;
-  }
+  td, th { padding: 8px 8px }
 
-  td {
-    border-bottom: 1px solid #ddd;
-  }
+  td { border-bottom: 1px solid #ddd }
 
   th {
     border-top: 1px solid #000;
@@ -129,6 +167,11 @@
 
   table.table-striped tr:nth-child(2n) {
     background-color: #cff;
+  }
+
+  utl.nav, ul.navbar-nav {
+    display: flex;
+    list-style: none;
   }
 
   .text-center  { text-align: center  }
