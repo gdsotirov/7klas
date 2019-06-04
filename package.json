@@ -1,0 +1,23 @@
+{
+  "name": "7klas",
+  "version": "0.1.0",
+  "description": "Where after 7th grade?",
+  "keywords": [
+    "7th grade",
+    "ranking"
+  ],
+  "homepage": "https://sotirov-bg.net/apps/7klas/",
+  "license": "GPL-3.0-only",
+  "author": "Georgi D. Sotirov",
+  "contributors": [],
+  "bugs": {
+    "url": "https://sotirov-bg.net/bugzilla/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gdsotirov/7klas.git"
+  },
+  "dependencies": {
+    "angular": "1.6.9"
+  }
+}
