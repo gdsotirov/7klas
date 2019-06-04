@@ -9,6 +9,7 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
   $scope.stSubj1 = '';
   $scope.stSubj2 = '';
   $scope.stRank = '';
+  $scope.stRankBy = 'both';
 
   $scope.cls_rnks == '';
   /* For running locally
@@ -100,18 +101,36 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
     $scope.hideform = true;
 
     var student_ranked = false;
+    var rank_by = 0;
     var new_arr = [];
     var new_item = {};
 
     /* Initialize with student's data */
     new_item.schlName = $scope.stName;
     new_item.clsName  = 'n/a';
-    new_item.min_rank_I = $scope.stRank;
-    new_item.min_rank_II = $scope.stRank;
+    if ( $scope.stRankBy == 'first' ) {
+      new_item.min_rank_I = $scope.stRank;
+      new_item.min_rank_II = 0.0;
+    }
+    else if ( $scope.stRankBy == 'second' ) {
+      new_item.min_rank_I = 0.0
+      new_item.min_rank_II = $scope.stRank;
+    }
+    else { /* both */
+      new_item.min_rank_I  = $scope.stRank;
+      new_item.min_rank_II = $scope.stRank;
+    }
 
     var num = 0;
     angular.forEach($scope.cls_rnks, function(item) {
-      if ( $scope.stRank >= parseFloat(item.min_rank_I) && !student_ranked ) {
+      if ( $scope.stRankBy == 'first' || $scope.stRankBy == 'both' ) {
+        rank_by = parseFloat(item.min_rank_I);
+      }
+      else {
+        rank_by = parseFloat(item.min_rank_II);
+      }
+
+      if ( $scope.stRank >= rank_by && !student_ranked ) {
         student_ranked = true;
         new_item.number = ++num;
         new_item.clsName = item.clsName;
@@ -125,6 +144,41 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
         new_arr.push(item);
       }
     });
+
+    /* Loop again to rank by second ranks */
+    if ( $scope.stRankBy == 'both' )
+    {
+      $scope.cls_rnks = new_arr;
+
+      var new_item2 = {};
+      new_item2.schlName = $scope.stName;
+      new_item2.clsName  = 'n/a';
+      new_item2.min_rank_I = $scope.stRank;
+      new_item2.min_rank_II = $scope.stRank;
+
+      new_arr = [];
+      student_ranked = false;
+      num = 0;
+
+      angular.forEach($scope.cls_rnks, function(item) {
+        if ( $scope.stRank >= parseFloat(item.min_rank_II)
+             && !student_ranked
+             && item.source != 'user' /* avoid previous ranking */ )
+        {
+          student_ranked = true;
+          new_item2.number = ++num;
+          new_item2.clsName = item.clsName;
+          new_item2.source = 'user';
+          new_arr.push(new_item2);
+          item.number = ++num;
+          new_arr.push(item);
+        }
+        else {
+          item.number = ++num;
+          new_arr.push(item);
+        }
+      });
+    }
 
     /* Add at the very end if not ranked higher */
     if ( !student_ranked ) {

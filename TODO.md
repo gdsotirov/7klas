@@ -2,7 +2,6 @@
 
 Things to implement if/when there's time:
 
-* Allow ranking by first, second and both rank lists
 * Class rankings by sex (where applicable)
     * Add information about sex for class rankings
     * Allow user to define student's sex in the application

@@ -130,6 +130,17 @@ maxlength="64" size="32" placeholder="Име">
 </div>
 
 <div class="row">
+<div class="col-6 text-right">
+<label for="stRankCmpr">Класиране по:</label>
+</div>
+<div class="col-6 input-group">
+<p><input name="stRankBy" type="radio" ng-model="stRankBy" value="first">I класиране&nbsp;
+<input name="stRankBy" type="radio" ng-model="stRankBy" value="second">II класиране&nbsp;
+<input name="stRankBy" type="radio" ng-model="stRankBy" value="both" checked="checked">двете</p>
+</div>
+</div>
+
+<div class="row">
 <div class="col text-center">
 <button class="btn btn-primary" ng-click="rankStudent()" ng-disabled="error || incomplete">&#10004; Класирай</button>
 <button class="btn btn-primary" ng-click="cancel()">&#10060; Отказ</button>
