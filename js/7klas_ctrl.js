@@ -132,11 +132,14 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
 
       if ( $scope.stRank >= rank_by && !student_ranked ) {
         student_ranked = true;
-        new_item.number = ++num;
+        new_item.number = '--';
         new_item.clsName = item.clsName;
         new_item.source = 'user';
         new_arr.push(new_item);
         item.number = ++num;
+        new_arr.push(item);
+      }
+      else if ( item.source == 'user' ) { /* just push user items */
         new_arr.push(item);
       }
       else {
@@ -166,11 +169,14 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
              && item.source != 'user' /* avoid previous ranking */ )
         {
           student_ranked = true;
-          new_item2.number = ++num;
+          new_item2.number = '--';
           new_item2.clsName = item.clsName;
           new_item2.source = 'user';
           new_arr.push(new_item2);
           item.number = ++num;
+          new_arr.push(item);
+        }
+        else if ( item.source == 'user' ) {  /* just push user items */
           new_arr.push(item);
         }
         else {
