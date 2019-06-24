@@ -58,21 +58,9 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
     }
   };
 
-  $scope.mark_to_score = function(mark) {
-    var score = 0;
-    switch(mark) {
-        case 6: score = 50; break;
-        case 5: score = 39; break;
-        case 4: score = 26; break;
-        case 3: score = 15; break;
-        default: score = 0;
-    }
-    return score;
-  };
-
   $scope.calcRank = function(bel, bmul, mat, mmul, subj1, subj2) {
     var rank = (bmul * bel) + (mmul * mat) +
-               $scope.mark_to_score(subj1) + $scope.mark_to_score(subj2);
+               $7klas.mark_to_score(subj1) + $7klas.mark_to_score(subj2);
     return rank;
   };
 
