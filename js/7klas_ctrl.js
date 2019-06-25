@@ -1,4 +1,4 @@
-/* 7klas Application Controler */
+/* 7klas Application Controller */
 
 angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http) {
   $scope.stName = '';
@@ -11,7 +11,7 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
   $scope.stRank = '';
   $scope.stRankBy = 'both';
 
-  $scope.cls_rnks == '';
+  $scope.cls_rnks = '';
   /* For running locally
     $scope.cls_rnks = [
     {schlName:'Училище 1', clsName:"Клас А", min_rank_I:456, min_rank_II:432 },
