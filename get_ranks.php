@@ -20,5 +20,5 @@ $json = "[".$json."]";
 
 $conn->close();
 
-echo($json);
+echo $json;
 ?>
