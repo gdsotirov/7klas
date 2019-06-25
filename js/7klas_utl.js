@@ -18,7 +18,7 @@ $7klas.round = function (number, places) {
  * @returns Scores
  */
 $7klas.mark_to_score = function (mark) {
-  var score = 0;
+  var score;
 
   if ( isNaN(mark) ) {
     throw "Mark is NOT a number!";
@@ -41,7 +41,7 @@ $7klas.mark_to_score = function (mark) {
  * @returns Mark in six-point marking system
  */
 $7klas.score_to_mark = function (score) {
-  var mark = 0.0;
+  var mark;
 
   if ( isNaN(score) ) {
     throw "Score is NOT a number!";
