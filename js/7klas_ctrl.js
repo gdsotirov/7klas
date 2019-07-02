@@ -4,8 +4,8 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
   $scope.stName = '';
   $scope.stNEABEL = '';
   $scope.stNEABEL_mul = 1;
-  $scope.stNEAMAT_mul = 3;
   $scope.stNEAMAT = '';
+  $scope.stNEAMAT_mul = 3;
   $scope.stSubj1 = '';
   $scope.stSubj2 = '';
   $scope.stRank = '';
@@ -249,8 +249,18 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
   }
 
   $scope.$watch('stName'  ,function() {$scope.verify();});
-  $scope.$watch('stNEABEL',function() {$scope.verify(); $scope.showRank();});
-  $scope.$watch('stNEAMAT',function() {$scope.verify(); $scope.showRank();});
+  $scope.$watch('stNEABEL',function(newVal) {
+    /* Ensure comma is replaced with dot as decimal separator */
+    $scope.stNEABEL = newVal.replace(/,/g, '.');
+    $scope.verify();
+    $scope.showRank();
+  });
+  $scope.$watch('stNEAMAT',function(newVal) {
+    /* Ensure comma is replaced with dot as decimal separator */
+    $scope.stNEAMAT = newVal.replace(/,/g, '.');
+    $scope.verify();
+    $scope.showRank();
+  });
   $scope.$watch('stSubj1' ,function() {$scope.verify(); $scope.showRank();});
   $scope.$watch('stSubj2' ,function() {$scope.verify(); $scope.showRank();});
 
