@@ -30,14 +30,15 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
       /* Number rows here, because in MySQL 5.7 Window functions (e.g.
        * ROW_NUMBER) is not available.
        */
-      var $num = 0;
+      var num = 0;
       $scope.cls_rnks_all = response.data;
-      var $prev_yr = $scope.cls_rnks_all[0].clsYear;
+      var prev_yr = $scope.cls_rnks_all[0].clsYear;
       angular.forEach($scope.cls_rnks_all, function(item) {
-        if ( item.clsYear != $prev_yr ) {
-          $num = 0; /* rest numbering for each year */
+        if ( item.clsYear != prev_yr ) {
+          num = 0; /* rest numbering for each year */
+          prev_yr = item.clsYear;
         }
-        item.number = ++$num;
+        item.number = ++num;
         item.src = 'db';
         if ( $scope.cls_rnks_yrs.indexOf(item.clsYear) == -1 ) {
           $scope.cls_rnks_yrs.push(item.clsYear);
