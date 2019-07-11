@@ -9,11 +9,11 @@ CREATE TABLE class_ranks (
 
   PRIMARY KEY (id),
 
-  INDEX fk_cr_class_idx (class_id ASC) VISIBLE,
+  INDEX fk_cr_class_idx (class_id ASC, yr ASC),
 
   CONSTRAINT fk_cr_class
-    FOREIGN KEY (class_id)
-    REFERENCES classes (id)
+    FOREIGN KEY (class_id , yr)
+    REFERENCES classes (id , yr)
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 )

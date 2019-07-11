@@ -9,11 +9,11 @@ CREATE TABLE classes (
   subj2_id  VARCHAR(5)  NOT NULL COMMENT 'Subject 2',
   school_id INT         NOT NULL,
 
-  PRIMARY KEY (id),
+  PRIMARY KEY (id, yr),
 
-  INDEX fk_class_school_idx (school_id ASC) VISIBLE,
-  INDEX fk_class_subj1_idx (subj1_id ASC) VISIBLE,
-  INDEX fk_class_subj2_idx (subj2_id ASC) VISIBLE,
+  INDEX fk_class_school_idx (school_id ASC),
+  INDEX fk_class_subj1_idx (subj1_id ASC),
+  INDEX fk_class_subj2_idx (subj2_id ASC),
 
   CONSTRAINT fk_class_school
     FOREIGN KEY (school_id)
