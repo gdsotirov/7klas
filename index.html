@@ -152,6 +152,11 @@ maxlength="64" size="32" placeholder="Име">
 <div class="row">
 <div class="col">
 <h2 id="ranking">Класиране по минимален бал</h2>
+<form>
+<label for="rnkYear">Година:</label>
+<select id="rnkYear" ng-model="rnkYear" ng-change="rnkYearChange()" ng-options="x for x in cls_rnks_yrs">
+</select>
+</form>
 </div>
 </div>
 

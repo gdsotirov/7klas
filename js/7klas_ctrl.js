@@ -10,8 +10,11 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
   $scope.stSubj2 = '';
   $scope.stRank = '';
   $scope.stRankBy = 'both';
+  $scope.rnkYear = new Date().getFullYear().toString();
 
+  $scope.cls_rnks_all = '';
   $scope.cls_rnks = '';
+  $scope.cls_rnks_yrs = [];
   /* For running locally
     $scope.cls_rnks = [
     {schlName:'Училище 1', clsName:"Клас А", min_rank_I:456, min_rank_II:432 },
@@ -28,10 +31,24 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
        * ROW_NUMBER) is not available.
        */
       var $num = 0;
-      $scope.cls_rnks = response.data;
-      angular.forEach($scope.cls_rnks, function(item) {
+      $scope.cls_rnks_all = response.data;
+      var $prev_yr = $scope.cls_rnks_all[0].clsYear;
+      angular.forEach($scope.cls_rnks_all, function(item) {
+        if ( item.clsYear != $prev_yr ) {
+          $num = 0; /* rest numbering for each year */
+        }
         item.number = ++$num;
         item.src = 'db';
+        if ( $scope.cls_rnks_yrs.indexOf(item.clsYear) == -1 ) {
+          $scope.cls_rnks_yrs.push(item.clsYear);
+        }
+      });
+
+      /* Just to be sure */
+      $scope.cls_rnks_yrs.sort(function(a, b){return a - b});
+
+      $scope.cls_rnks = $scope.cls_rnks_all.filter(function(item) {
+        return item.clsYear == $scope.rnkYear;
       });
   });
 
@@ -264,4 +281,10 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
   $scope.$watch('stSubj1' ,function() {$scope.verify(); $scope.showRank();});
   $scope.$watch('stSubj2' ,function() {$scope.verify(); $scope.showRank();});
 
+  $scope.rnkYearChange = function() {
+    $scope.cls_rnks = $scope.cls_rnks_all.filter(function(item) {
+      return item.clsYear == $scope.rnkYear;
+    });
+    $scope.rankStudent();
+  };
 });
