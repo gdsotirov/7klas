@@ -48,7 +48,7 @@ $7klas.score_to_mark = function (score) {
   }
 
   if ( score < 0 || score > 100 ) {
-    throw "Score should be betweeen 0 and 100!";
+    throw "Score should be between 0 and 100!";
   }
 
   if (score <= 15) {
@@ -59,4 +59,11 @@ $7klas.score_to_mark = function (score) {
   }
 
   return mark;
+}
+
+/**
+ * Filter only unique items in an array
+ */
+$7klas.unique_items = function (value, index, self) {
+  return self.indexOf(value) === index;
 }
