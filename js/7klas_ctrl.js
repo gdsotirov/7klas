@@ -15,20 +15,23 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
   $scope.cls_rnks_all = '';
   $scope.cls_rnks = '';
   $scope.cls_rnks_yrs = [];
-  /* For running locally
+  /* For running locally *
     $scope.cls_rnks = [
-    {schlName:'Училище 1', clsName:"Клас А", min_rank_I:456, min_rank_II:432 },
-    {schlName:'Училище 2', clsName:"Клас Б", min_rank_I:321, min_rank_II:123 }
+    {clsYear: "2019", schlName:'Училище 1', clsName:"Клас А", min_rank_I:456, min_rank_II:432 },
+    {clsYear: "2019", schlName:'Училище 2', clsName:"Клас Б", min_rank_I:321, min_rank_II:234 },
+    {clsYear: "2019", schlName:'Училище 3', clsName:"Клас В", min_rank_I:123, min_rank_II:111 }
   ];
 
-  var $num = 0;
+  $scope.cls_rnks_yrs = ["2019"];
+
+  var num = 0;
   angular.forEach($scope.cls_rnks, function(item) {
-    item.number = ++$num;
+    item.number = ++num;
   });*/
 
   $http.get("get_ranks.php").then(function (response) {
       /* Number rows here, because in MySQL 5.7 Window functions (e.g.
-       * ROW_NUMBER) is not available.
+       * ROW_NUMBER) are not available.
        */
       var num = 0;
       $scope.cls_rnks_all = response.data;
@@ -286,6 +289,9 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
     $scope.cls_rnks = $scope.cls_rnks_all.filter(function(item) {
       return item.clsYear == $scope.rnkYear;
     });
-    $scope.rankStudent();
+
+    if ( !$scope.error && !$scope.incomplete ) {
+      $scope.rankStudent();
+    }
   };
 });
