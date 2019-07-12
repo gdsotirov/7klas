@@ -1,6 +1,10 @@
 /* 7klas Application supplementary styles */
 
 @media screen {
+  abbr[title] {
+    text-decoration: underline dotted;
+  }
+
   div.container { margin-top: 4em }
   div.input-group p, div.input-group span { margin: 0.3em }
 
