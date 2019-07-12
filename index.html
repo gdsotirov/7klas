@@ -132,12 +132,15 @@ maxlength="64" size="32" placeholder="Име">
 
 <div class="row">
 <div class="col-6 text-right">
-<label for="stRankCmpr">Класиране по:</label>
+<label>Класиране по:</label>
 </div>
 <div class="col-6 input-group">
-<p><input name="stRankBy" type="radio" ng-model="stRankBy" value="first">I класиране&nbsp;
-<input name="stRankBy" type="radio" ng-model="stRankBy" value="second">II класиране&nbsp;
-<input name="stRankBy" type="radio" ng-model="stRankBy" value="both" checked="checked">двете</p>
+<p><input name="stRankBy" id="stRankByI" type="radio" ng-model="stRankBy" value="first">
+<label for="stRankByI">I класиране</label>&nbsp;
+<input name="stRankBy" id="stRankByII" type="radio" ng-model="stRankBy" value="second">
+<label for="stRankByII">II класиране</label>&nbsp;
+<input name="stRankBy" id="stRankByBoth" type="radio" ng-model="stRankBy" value="both" checked="checked">
+<label for="stRankByBoth">двете</label></p>
 </div>
 </div>
 
