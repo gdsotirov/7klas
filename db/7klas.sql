@@ -1,5 +1,5 @@
 -- MySQL Workbench Synchronization
--- Generated: 2019-05-24 21:43
+-- Generated: 2019-11-18 18:32
 -- Model: New Model
 -- Version: 1.0
 -- Project: Name of the project
@@ -9,8 +9,10 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
+CREATE SCHEMA IF NOT EXISTS `7klas` DEFAULT CHARACTER SET utf8 ;
+
 CREATE TABLE IF NOT EXISTS `7klas`.`schools` (
-  `id` INT(7) NOT NULL,
+  `id` INT(11) NOT NULL,
   `name` VARCHAR(128) NOT NULL,
   `short_name` VARCHAR(32) NOT NULL,
   `telephone` VARCHAR(32) NULL DEFAULT NULL,
@@ -51,23 +53,23 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS `7klas`.`cities` (
-  `id` INT(4) NOT NULL,
+  `id` INT(11) NOT NULL,
   `name` VARCHAR(64) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS `7klas`.`classes` (
-  `id` INT(8) NOT NULL,
+  `id` INT(11) NOT NULL,
   `name` VARCHAR(64) NOT NULL,
-  `numcl` INT(1) NOT NULL COMMENT 'Number of classes',
-  `yr` YEAR NOT NULL,
-  `coef_bel` INT(1) NOT NULL COMMENT 'Coeficient for BEL result',
+  `numcl` INT(11) NOT NULL COMMENT 'Number of classes',
+  `yr` YEAR NOT NULL COMMENT 'School year starting',
+  `coef_bel` INT(11) NOT NULL COMMENT 'Coeficient for BEL result',
   `coef_mat` VARCHAR(45) NOT NULL COMMENT 'Coeficient for MAT result',
   `subj1_id` VARCHAR(5) NOT NULL COMMENT 'Subject 1',
   `subj2_id` VARCHAR(5) NOT NULL COMMENT 'Subject 2',
   `school_id` INT(11) NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`, `yr`),
   INDEX `fk_class_school_idx` (`school_id` ASC) VISIBLE,
   INDEX `fk_class_subj1_idx` (`subj1_id` ASC) VISIBLE,
   INDEX `fk_class_subj2_idx` (`subj2_id` ASC) VISIBLE,
@@ -99,8 +101,8 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `7klas`.`students` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(64) NOT NULL COMMENT 'Full name',
-  `score_nea_bel` INT(3) NOT NULL COMMENT 'Score from National External Assesment BEL',
-  `score_nea_mat` INT(3) NOT NULL COMMENT 'Score from National External Assesment MAT',
+  `score_nea_bel` INT(11) NOT NULL COMMENT 'Score from National External Assesment BEL',
+  `score_nea_mat` INT(11) NOT NULL COMMENT 'Score from National External Assesment MAT',
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -109,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `7klas`.`subj_marks` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `student_id` INT(11) NOT NULL,
   `subject_id` VARCHAR(5) NOT NULL,
-  `mark` INT(1) NOT NULL CONSTRAINT mark_check CHECK (mark >= 2 AND mark <= 6),
+  `mark` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_sm_student_idx` (`student_id` ASC) VISIBLE,
   INDEX `fk_sm_subject_idx` (`subject_id` ASC) VISIBLE,
@@ -135,19 +137,20 @@ CREATE TABLE IF NOT EXISTS `7klas`.`class_rankings` (
   `max_rank_I` DECIMAL(5,2) NOT NULL COMMENT 'Maximal rank from Ist ranking',
   `max_rank_II` VARCHAR(45) NOT NULL COMMENT 'Maximal rank from IInd ranking',
   PRIMARY KEY (`id`),
-  INDEX `fk_cr_class_idx` (`class_id` ASC) VISIBLE,
+  INDEX `fk_cr_class_idx` (`class_id` ASC, `yr` ASC) VISIBLE,
   CONSTRAINT `fk_cr_class`
-    FOREIGN KEY (`class_id`)
-    REFERENCES `7klas`.`classes` (`id`)
+    FOREIGN KEY (`class_id` , `yr`)
+    REFERENCES `7klas`.`classes` (`id` , `yr`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+
 -- -----------------------------------------------------
 -- Placeholder table for view `7klas`.`ClassRanks`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `7klas`.`ClassRanks` (`schlName` INT, `clsName` INT, `min_rank_I` INT, `min_rank_II` INT);
+CREATE TABLE IF NOT EXISTS `7klas`.`ClassRanks` (`clsYear` INT, `schlName` INT, `clsName` INT, `min_rank_I` INT, `min_rank_II` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `7klas`.`ClassRanksJSON`
@@ -155,50 +158,51 @@ CREATE TABLE IF NOT EXISTS `7klas`.`ClassRanks` (`schlName` INT, `clsName` INT, 
 CREATE TABLE IF NOT EXISTS `7klas`.`ClassRanksJSON` (`json_obj` INT);
 
 
-USE `test`;
+USE `7klas`;
 
 -- -----------------------------------------------------
 -- View `7klas`.`ClassRanks`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `7klas`.`ClassRanks`;
-USE `test`;
+USE `7klas`;
 CREATE  OR REPLACE VIEW ClassRanks AS
-SELECT CONCAT(SC.id, ' ', SC.short_name) schlName,
+SELECT CAST(CR.yr AS CHAR(4)) clsYear,
+       CONCAT(SC.id, ' ', SC.short_name) schlName,
        CONCAT(SUBSTR(CONVERT(CL.id, CHAR), 5), ' ', CL.`name`)     clsName,
        CR.min_rank_I,
        CR.min_rank_II
   FROM classes        CL,
        class_rankings CR,
        schools        SC
- WHERE CR.class_id = CL.id
+ WHERE CR.class_id  = CL.id
+   AND CR.yr        = CL.yr
    AND CL.school_id = SC.id
-   AND CL.yr = YEAR(CURDATE())
-   AND CR.yr = YEAR(CURDATE()) - 1
- ORDER BY CR.min_rank_II DESC;
+ ORDER BY CR.yr, CR.min_rank_II DESC;
 
 
-USE `test`;
+USE `7klas`;
 
 -- -----------------------------------------------------
 -- View `7klas`.`ClassRanksJSON`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `7klas`.`ClassRanksJSON`;
-USE `test`;
+USE `7klas`;
 CREATE  OR REPLACE VIEW ClassRanksJSON AS
-SELECT JSON_OBJECT("schlName"	, schlName,
-                       "clsName" 	, clsName,
-                       "min_rank_I"	, min_rank_I,
-                       "min_rank_II", min_rank_II
-                      ) json_obj
+SELECT JSON_OBJECT("clsYear"    , clsYear,
+                   "schlName"   , schlName,
+                   "clsName"    , clsName,
+                   "min_rank_I" , min_rank_I,
+                   "min_rank_II", min_rank_II
+                  ) json_obj
   FROM ClassRanks;
 
-DELIMITER $$
-USE `7klas`$$
+DELIMITER //
+USE `7klas`//
 CREATE FUNCTION mark_to_score(mark INT)
-  RETURNS INT(2)
+  RETURNS INT
   DETERMINISTIC
 BEGIN
-  DECLARE score INT(2);
+  DECLARE score INT;
 
   SET score := CASE mark
     WHEN 6 THEN 50
@@ -209,7 +213,7 @@ BEGIN
   END;
 
   RETURN score;
-END$$
+END//
 
 DELIMITER ;
 

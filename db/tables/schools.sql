@@ -1,5 +1,5 @@
 CREATE TABLE schools (
-  id          INT(7)        NOT NULL,
+  id          INT           NOT NULL,
   name        VARCHAR(128)  NOT NULL,
   short_name  VARCHAR(32)   NOT NULL,
   telephone   VARCHAR(32)   NULL      DEFAULT NULL,

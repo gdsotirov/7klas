@@ -1,5 +1,5 @@
 CREATE TABLE cities (
-  id    INT(4)      NOT NULL,
+  id    INT         NOT NULL,
   name  VARCHAR(64) NOT NULL,
 
   PRIMARY KEY (id)
