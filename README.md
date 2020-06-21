@@ -9,5 +9,5 @@ is done compared to the minimal class ranks from previous years' campaigns.
 # Requirements
 
 The database is designed for and requires [MySQL](https://www.mysql.com/) 5.7
-or higher. The web application requires [Angualar](https://angularjs.org/) 1.7.9
+or higher. The web application requires [Angualar](https://angularjs.org/) 1.8.0
 or newer.
