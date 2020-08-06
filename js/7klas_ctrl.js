@@ -117,16 +117,12 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
     /* Initialize with student's data */
     new_item.schlName = $scope.stName;
     new_item.clsName  = 'n/a';
-    if ( $scope.stRankBy == 'first' ) {
+    if ( $scope.stRankBy == 'first' || $scope.stRankBy == 'both' ) {
       new_item.min_rank_I = $scope.stRank;
       new_item.min_rank_II = 0.0;
     }
     else if ( $scope.stRankBy == 'second' ) {
-      new_item.min_rank_I = 0.0
-      new_item.min_rank_II = $scope.stRank;
-    }
-    else { /* both */
-      new_item.min_rank_I  = $scope.stRank;
+      new_item.min_rank_I = 0.0;
       new_item.min_rank_II = $scope.stRank;
     }
 
@@ -141,6 +137,9 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
 
       if ( $scope.stRank >= rank_by && !student_ranked ) {
         student_ranked = true;
+        if ( $scope.stRankBy == 'both' ) {
+          new_item.schlName += " (I)";
+        }
         new_item.number = '--';
         new_item.clsName = item.clsName;
         new_item.source = 'user';
@@ -163,9 +162,9 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
       $scope.cls_rnks = new_arr;
 
       var new_item2 = {};
-      new_item2.schlName = $scope.stName;
+      new_item2.schlName = $scope.stName + " (II)";
       new_item2.clsName  = 'n/a';
-      new_item2.min_rank_I = $scope.stRank;
+      new_item2.min_rank_I = 0.0;
       new_item2.min_rank_II = $scope.stRank;
 
       new_arr = [];
