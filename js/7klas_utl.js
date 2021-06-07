@@ -67,3 +67,12 @@ $7klas.score_to_mark = function (score) {
 $7klas.unique_items = function (value, index, self) {
   return self.indexOf(value) === index;
 }
+
+/**
+ * Get the maximum element of a numeric array
+ * See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max#getting_the_maximum_element_of_an_array
+ */
+$7klas.getMaxOfArray = function (numArray) {
+  return Math.max.apply(null, numArray);
+}
+
