@@ -51,6 +51,8 @@ angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http)
       /* Just to be sure */
       $scope.cls_rnks_yrs.sort(function(a, b){return a - b});
 
+      $scope.rnkYear = $7klas.getMaxOfArray($scope.cls_rnks_yrs);
+
       $scope.cls_rnks = $scope.cls_rnks_all.filter(function(item) {
         return item.clsYear == $scope.rnkYear;
       });
