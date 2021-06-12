@@ -1,0 +1,12 @@
+<IfModule mod_headers.c>
+  Header always set Content-Security-Policy-Report-Only "\
+base-uri 'self'; \
+default-src 'self'; \
+font-src 'self' https://maxcdn.bootstrapcdn.com; \
+object-src 'none'; \
+report-uri /csp_report.php; \
+require-trusted-types-for 'script'; \
+script-src script-src 'self' https://ajax.googleapis.com; \
+style-src 'self' https://maxcdn.bootstrapcdn.com https://stackpath.bootstrapcdn.com"
+</IfModule>
+
