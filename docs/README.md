@@ -16,3 +16,6 @@ as follows:
 * 2020
   - I ranking from 2020-07-13: [direct link](https://ruo-sofia-grad.com/%d1%81%d0%bf%d1%80%d0%b0%d0%b2%d0%ba%d0%b0-%d0%b7%d0%b0-%d0%bc%d0%b8%d0%bd%d0%b8%d0%bc%d0%b0%d0%bb%d0%bd%d0%b8%d1%8f-%d0%b8-%d0%bc%d0%b0%d0%ba%d1%81%d0%b8%d0%bc%d0%b0%d0%bb%d0%bd%d0%b8%d1%8f-%d0%b1/), [sofia-20200713-minmax.pdf](docs/sofia-20200713-minmax.pdf);
   - II ranking from 2020-07-20: [direct link](https://ruo-sofia-grad.com/%D1%81%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0-%D0%B7%D0%B0-%D0%BC%D0%B8%D0%BD%D0%B8%D0%BC%D0%B0%D0%BB%D0%BD%D0%B8%D1%8F-%D0%B8-%D0%BC%D0%B0%D0%BA%D1%81%D0%B8%D0%BC%D0%B0%D0%BB%D0%BD%D0%B8%D1%8F-%D0%B1-2/), [sofia-20200720-minmax.pdf](docs/sofia-20200720-minmax.pdf).
+* 2021:
+  - I ranking from 2021-07-13: [direct link](https://ruo-sofia-grad.com/%d0%b8%d0%b7%d0%bf%d0%b8%d1%82%d0%b8-%d0%b8-%d0%bf%d1%80%d0%b8%d0%b5%d0%bc-%d0%bd%d0%b0-%d1%83%d1%87%d0%b5%d0%bd%d0%b8%d1%86%d0%b8/%d0%bf%d1%80%d0%b8%d0%b5%d0%bc-%d0%bd%d0%b0-%d1%83%d1%87%d0%b5%d0%bd%d0%b8%d1%86%d0%b8/%d0%bf%d1%80%d0%b8%d0%b5%d0%bc-%d0%b2-viii-%d0%ba%d0%bb%d0%b0%d1%81/), [sofia-20210713-minmax.pdf](docs/sofia-20210713-minmax.pdf);
+
