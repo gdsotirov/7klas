@@ -6,6 +6,10 @@ allowing ranking of students based on information about their NEA (National
 External Assessment) results and marks to calculate student's rank. The ranking
 is done compared to the minimal class ranks from previous years' campaigns.
 
+# Database model
+
+![7klas Model](db/model/7klas.png)
+
 # Requirements
 
 The database is designed for and requires [MySQL](https://www.mysql.com/) 5.7
