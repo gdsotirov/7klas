@@ -2,7 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-$conn = new mysqli("localhost", "7klas_app", "7klas.APP", "7klas57");
+$conn = new mysqli("localhost", "7klas_app", "7klas.APP", "7klas");
 
 $rnk_yr = "";
 if ( $argc > 1 && is_numeric($argv[1]) ) {
