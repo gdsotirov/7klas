@@ -14,13 +14,13 @@ SELECT ST.`name`, SC.short_name, CL.`name`, DS.`name`,
        LATERAL
        (SELECT subject_id, mark
           FROM subj_marks
-		 WHERE student_id = ST.id
+         WHERE student_id = ST.id
            AND subject_id = CL.subj1_id
        ) SUBJ1,
        LATERAL
        (SELECT subject_id, mark
           FROM subj_marks
-		 WHERE student_id = ST.id
+         WHERE student_id = ST.id
            AND subject_id = CL.subj2_id
        ) SUBJ2
  WHERE CL.school_id = SC.id
