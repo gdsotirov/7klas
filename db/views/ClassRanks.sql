@@ -10,4 +10,5 @@ SELECT CAST(CR.yr AS CHAR(4)) clsYear,
  WHERE CR.class_id  = CL.id
    AND CR.yr        = CL.yr
    AND CL.school_id = SC.id
+   AND ( CR.min_rank_I > 0 OR CR.min_rank_II > 0 )
  ORDER BY CR.yr, CR.min_rank_II DESC;
