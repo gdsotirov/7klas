@@ -4,6 +4,9 @@ This project uses some external documents. The minimum and maximum rankings
 are taken from the site of [RUO Sofia Grad](https://ruo-sofia-grad.com/)
 as follows:
 
+* 2023:
+  - I ranking from 2023-07-12: [direct link](https://ruo-sofia-grad.com/wp-content/uploads/2023/07/min_ma%D1%85_paralelki_1.etap_2023.xlsx)
+  [sofia-20230712-minmax.xlsx](sofia-20230712-minmax.xlsx);
 * 2022:
   - I ranking from 2022-07-11: [direct link](https://ruo-sofia-grad.com/wp-content/uploads/2022/07/po_bal_sait.xlsx),
   [sofia-20220711-minmax.xlsx](sofia-20220711-minmax.xlsx);
