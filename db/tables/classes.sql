@@ -1,15 +1,15 @@
 CREATE TABLE classes (
+  yr        YEAR          NOT NULL COMMENT 'School year starting',
+  school_id INT           NOT NULL,
   id        INT           NOT NULL,
   name      VARCHAR(64)   NOT NULL,
   numcl     DECIMAL(2,1)  NOT NULL COMMENT 'Number of classes',
-  yr        YEAR          NOT NULL COMMENT 'School year starting',
-  coef_bel  INT           NOT NULL COMMENT 'Coeficient for BEL result',
-  coef_mat  VARCHAR(45)   NOT NULL COMMENT 'Coeficient for MAT result',
+  coef_bel  INT           NOT NULL COMMENT 'Coefficient for BEL result',
+  coef_mat  VARCHAR(45)   NOT NULL COMMENT 'Coefficient for MAT result',
   subj1_id  VARCHAR(5)    NOT NULL COMMENT 'Subject 1',
   subj2_id  VARCHAR(5)    NOT NULL COMMENT 'Subject 2',
-  school_id INT           NOT NULL,
 
-  PRIMARY KEY (id, yr),
+  PRIMARY KEY (yr, id),
 
   INDEX fk_class_school_idx (school_id ASC),
   INDEX fk_class_subj1_idx (subj1_id ASC),
