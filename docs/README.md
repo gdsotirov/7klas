@@ -9,6 +9,8 @@ as follows:
   [sofia-20230621-classes.xlsx](sofia-20230621-classes.xlsx);
   - I ranking from 2023-07-12: [direct link](https://ruo-sofia-grad.com/wp-content/uploads/2023/07/min_ma%D1%85_paralelki_1.etap_2023.xlsx),
   [sofia-20230712-minmax.xlsx](sofia-20230712-minmax.xlsx);
+  - II ranking from 2023-07-19: [direct link](https://ruo-sofia-grad.com/wp-content/uploads/2023/07/min_max_2_etap_2023.xlsx),
+  [sofia-20230719-minmax.xlsx](sofia-20230719-minmax.xlsx);
 * 2022:
   - Classes list from 2022-06-27: [direct link](https://ruo-sofia-grad.com/wp-content/uploads/2022/06/Za_saita_s_kodove_i_baloobrazuvane_2022.xlsx),
   [sofia-20220627-classes.xlsx](sofia-20220627-classes.xlsx);
