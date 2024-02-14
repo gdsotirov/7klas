@@ -18,13 +18,13 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="alternate stylesheet" title="Bootstrap 4"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
-<script src="js/7klas_utl.js"></script>
-<script src="js/7klas_app.js"></script>
-<script src="js/7klas_ctrl.js"></script>
+<script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script defer src="js/7klas_utl.js"></script>
+<script defer src="js/7klas_app.js"></script>
+<!--<script defer src="js/7klas_ctrl.js"></script>//-->
 </head>
 
-<body ng-app="7klas_app" ng-controller="7klas_ctrl">
+<body>
 
 <nav class="navbar navbar-default navbar-expand bg-primary navbar-dark navbar-fixed-top fixed-top">
 <ul class="nav navbar-nav">
@@ -34,7 +34,7 @@
 </ul>
 </nav>
 
-<div class="container">
+<div class="container" id="app_7klas">
 
 <h1 id="top">Къде след 7<sup>ми</sup> клас?</h1>
 
@@ -49,14 +49,14 @@
 
 <div class="row">
 <div class="col text-center">
-<button class="btn btn-primary" ng-click="addStudent()">&#10133; Добавяне на ученик</button>
+<button class="btn btn-primary" @click="addStudent()">&#10133; Добавяне на ученик</button>
 </div>
 </div>
 
-<form ng-hide="hideform">
+<form v-show="show_form">
 <div class="row">
 <div class="col">
-<h2 ng-show="edit">Данни за ученика</h2>
+<h2 v-show="edit">Данни за ученика</h2>
 </div>
 </div>
 
@@ -158,7 +158,8 @@ maxlength="64" size="32" placeholder="Име">
 <form>
 <div class="col text-center">
 <label for="rnkYear">Година:</label>
-<select id="rnkYear" ng-model="rnkYear" ng-change="rnkYearChange()" ng-options="x for x in cls_rnks_yrs track by x">
+<select id="rnkYear">
+  <option v-for="x in class_ranks_yrs" :value="x">{{ x }}</option>
 </select>
 </div>
 </form>
@@ -173,13 +174,13 @@ maxlength="64" size="32" placeholder="Име">
     <th>Минимален бал I класиране</th>
     <th>Минимален бал II класиране</th>
   </tr>
-  <tr ng-repeat="clrnk in cls_rnks" ng-style="{color: getItemStyle(clrnk) }">
+  <!--<tr ng-repeat="clrnk in cls_rnks" ng-style="{color: getItemStyle(clrnk) }">
     <td>{{ clrnk.number   }}</td>
     <td>{{ clrnk.schlName }}</td>
     <td>{{ clrnk.clsName  }}</td>
-    <td>{{ clrnk.min_rank_I  | number : 2 }}</td>
-    <td>{{ clrnk.min_rank_II | number : 2 }}</td>
-  </tr>
+    <td>{{ clrnk.min_rank_I }}</td>
+    <td>{{ clrnk.min_rank_II }}</td>
+  </tr>//-->
 </table>
 
 <div class="row">
