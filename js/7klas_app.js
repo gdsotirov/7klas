@@ -20,4 +20,4 @@ const app = Vue.createApp({
     }
 })
 
-app.mount('#app_7klas')
+app.mount('#a7klas_app')
