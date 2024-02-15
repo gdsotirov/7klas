@@ -35,26 +35,26 @@ setup() {
        * ROW_NUMBER) are not available.
        *
       var num = 0
-      cls_rnks_all = response.data
-      var prev_yr = cls_rnks_all[0].clsYear
-      angular.forEach(cls_rnks_all, function(item) {
+      cls_ranks_all = response.data
+      var prev_yr = cls_ranks_all[0].clsYear
+      angular.forEach(cls_ranks_all, function(item) {
         if ( item.clsYear != prev_yr ) {
           num = 0 /* rest numbering for each year *
           prev_yr = item.clsYear
         }
         item.number = ++num
         item.src = 'db'
-        if ( cls_rnks_yrs.indexOf(item.clsYear) == -1 ) {
-          cls_rnks_yrs.push(item.clsYear)
+        if ( cls_ranks_yrs.indexOf(item.clsYear) == -1 ) {
+          cls_ranks_yrs.push(item.clsYear)
         }
       })
 
       /* More recent years first *
-      cls_rnks_yrs.sort().reverse()
+      cls_ranks_yrs.sort().reverse()
 
-      rnkYear = $7klas.getMaxOfArray(cls_rnks_yrs)
+      rnkYear = $7klas.getMaxOfArray(cls_ranks_yrs)
 
-      cls_rnks = cls_rnks_all.filter(function(item) {
+      cls_ranks = cls_ranks_all.filter(function(item) {
         return item.clsYear == rnkYear
       })
   })*/
@@ -288,7 +288,7 @@ setup() {
   Vue.watch(stSubj2 , function() {verify(); showRank()})
 
   function rnkYearChange() {
-    cls_rnks = cls_rnks_all.filter(function(item) {
+    cls_ranks = cls_ranks_all.filter(function(item) {
       return item.clsYear == rnkYear
     })
 
