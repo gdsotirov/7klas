@@ -2,7 +2,7 @@
 
 const app = Vue.createApp({
     setup() {
-        var class_ranks_yrs = Vue.ref(["2019"])
+        var class_ranks_yrs = Vue.ref(["2018", "2019", "2020", "2021", "2022", "2023", "2024"])
         var edit = Vue.ref(true)
         var rnkYear = Vue.ref(new Date().getFullYear().toString())
         var show_form = Vue.ref(false)
