@@ -13,20 +13,18 @@ setup() {
   var stRankBy = Vue.ref('both')
   var rnkYear = Vue.ref(new Date().getFullYear().toString())
 
-  var cls_ranks_all = Vue.ref('')
-  var cls_ranks = Vue.ref('')
-  var cls_ranks_yrs = Vue.ref([])
   /* For running locally */
-  var cls_ranks = [
+  var cls_ranks_all = [
     {clsYear: "2019", schlName:'Училище 1', clsName:"Клас А", min_rank_I:456, min_rank_II:432 },
     {clsYear: "2019", schlName:'Училище 2', clsName:"Клас Б", min_rank_I:321, min_rank_II:234 },
     {clsYear: "2019", schlName:'Училище 3', clsName:"Клас В", min_rank_I:123, min_rank_II:111 }
   ]
+  var cls_ranks = Vue.ref(cls_ranks_all)
 
   var cls_ranks_yrs = Vue.ref(['2018', '2019', '2020', '2021', '2022', '2023', '2024'])
 
   var num = 0
-  cls_ranks.forEach(function(item) {
+  cls_ranks.value.forEach(function(item) {
     item.number = ++num
   })
 
@@ -54,7 +52,7 @@ setup() {
 
       rnkYear.value = $7klas.getMaxOfArray(cls_ranks_yrs)
 
-      cls_ranks = cls_ranks_all.filter(function(item) {
+      cls_ranks.value = cls_ranks_all.filter(function(item) {
         return item.clsYear == rnkYear.value
       })
   })*/
@@ -130,7 +128,7 @@ setup() {
     }
 
     var num = 0
-    cls_ranks.forEach(function(item) {
+    cls_ranks.value.forEach(function(item) {
       if ( stRankBy.value == 'first' || stRankBy.value == 'both' ) {
         rank_by = parseFloat(item.min_rank_I)
       }
@@ -174,7 +172,7 @@ setup() {
       student_ranked = false
       num = 0
 
-      cls_ranks.forEach(function(item) {
+      cls_ranks.value.forEach(function(item) {
         if ( stRank.value >= parseFloat(item.min_rank_II)
              && !student_ranked
              && item.source != 'user' /* avoid previous ranking */ )
@@ -288,7 +286,7 @@ setup() {
   Vue.watch(stSubj2 , function() {verify(); showRank()})
 
   function rnkYearChange() {
-    cls_ranks = cls_ranks_all.filter(function(item) {
+    cls_ranks.value = cls_ranks_all.filter(function(item) {
       return item.clsYear == rnkYear.value
     })
 
