@@ -65,7 +65,7 @@
 <label for="stName">Име:</label>
 </div>
 <div class="col-6">
-<input id="stName" type="text" v-model="stName" ng-disabled="!edit"
+<input :disabled="!edit" id="stName" type="text" v-model="stName"
 maxlength="64" size="32" placeholder="Име">
 </div>
 </div>
@@ -146,7 +146,7 @@ maxlength="64" size="32" placeholder="Име">
 
 <div class="row">
 <div class="col text-center">
-<button class="btn btn-primary" ng-click="rankStudent()" ng-disabled="error || incomplete">&#10004; Класирай</button>
+<button class="btn btn-primary" :disabled="error || incomplete" ng-click="rankStudent()">&#10004; Класирай</button>
 <button class="btn btn-primary" @click="cancel()">&#10060; Отказ</button>
 </div>
 </div>
