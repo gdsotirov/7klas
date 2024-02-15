@@ -158,7 +158,7 @@ maxlength="64" size="32" placeholder="Име">
 <form>
 <div class="col text-center">
 <label for="rnkYear">Година:</label>
-<select id="rnkYear" v-model="rnkYear">
+<select id="rnkYear" @change="rnkYearChange()" v-model="rnkYear">
   <option v-for="x in cls_ranks_yrs" :value="x">{{ x }}</option>
 </select>
 </div>

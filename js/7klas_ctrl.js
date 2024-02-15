@@ -11,7 +11,7 @@ setup() {
   var stSubj2 = Vue.ref('')
   var stRank = Vue.ref('')
   var stRankBy = Vue.ref('both')
-  var rnkYear = new Date().getFullYear().toString()
+  var rnkYear = Vue.ref(new Date().getFullYear().toString())
 
   var cls_ranks_all = Vue.ref('')
   var cls_ranks = Vue.ref('')
@@ -52,10 +52,10 @@ setup() {
       /* More recent years first *
       cls_ranks_yrs.sort().reverse()
 
-      rnkYear = $7klas.getMaxOfArray(cls_ranks_yrs)
+      rnkYear.value = $7klas.getMaxOfArray(cls_ranks_yrs)
 
       cls_ranks = cls_ranks_all.filter(function(item) {
-        return item.clsYear == rnkYear
+        return item.clsYear == rnkYear.value
       })
   })*/
 
@@ -289,7 +289,7 @@ setup() {
 
   function rnkYearChange() {
     cls_ranks = cls_ranks_all.filter(function(item) {
-      return item.clsYear == rnkYear
+      return item.clsYear == rnkYear.value
     })
 
     if ( !error.value && !incomplete.value ) {
@@ -310,6 +310,7 @@ setup() {
     mul_change_mat,
     rankStudent,
     rnkYear,
+    rnkYearChange,
     showForm,
     stNEABEL,
     stNEABEL_mul,
