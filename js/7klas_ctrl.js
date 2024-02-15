@@ -25,10 +25,10 @@ setup() {
 
   var cls_ranks_yrs = Vue.ref(['2018', '2019', '2020', '2021', '2022', '2023', '2024'])
 
-  /*var num = 0
-  angular.forEach(cls_rnks, function(item) {
+  var num = 0
+  cls_ranks.forEach(function(item) {
     item.number = ++num
-  })*/
+  })
 
   /*$http.get("get_ranks.php").then(function (response) {
       /* Number rows here, because in MySQL 5.7 Window functions (e.g.
@@ -110,7 +110,7 @@ setup() {
   }
 
   function rankStudent() {
-    showForm.value = true
+    showForm.value = false
 
     var student_ranked = false
     var rank_by = 0
@@ -130,8 +130,7 @@ setup() {
     }
 
     var num = 0
-    /* TODO: rewrite */
-    angular.forEach(cls_rnks, function(item) {
+    cls_ranks.forEach(function(item) {
       if ( stRankBy.value == 'first' || stRankBy.value == 'both' ) {
         rank_by = parseFloat(item.min_rank_I)
       }
@@ -163,7 +162,7 @@ setup() {
     /* Loop again to rank by second ranks */
     if ( stRankBy.value == 'both' )
     {
-      cls_rnks = new_arr
+      cls_ranks.value = new_arr
 
       var new_item2 = {}
       new_item2.schlName = stName.value + " (II)"
@@ -175,8 +174,7 @@ setup() {
       student_ranked = false
       num = 0
 
-      /* TODO: rewrite */
-      angular.forEach(cls_rnks, function(item) {
+      cls_ranks.forEach(function(item) {
         if ( stRank.value >= parseFloat(item.min_rank_II)
              && !student_ranked
              && item.source != 'user' /* avoid previous ranking */ )
@@ -205,7 +203,7 @@ setup() {
       new_arr.push(new_item)
     }
 
-    cls_rnks = new_arr
+    cls_ranks.value = new_arr
   }
 
   function cancel() {
