@@ -19,9 +19,9 @@
 <link rel="alternate stylesheet" title="Bootstrap 4"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script defer src="js/7klas_ctrl.js"></script>
 <script defer src="js/7klas_utl.js"></script>
 <script defer src="js/7klas_app.js"></script>
-<!--<script defer src="js/7klas_ctrl.js"></script>//-->
 </head>
 
 <body>
@@ -53,7 +53,7 @@
 </div>
 </div>
 
-<form v-show="show_form">
+<form v-show="showForm">
 <div class="row">
 <div class="col">
 <h2 v-show="edit">Данни за ученика</h2>
@@ -79,7 +79,7 @@ maxlength="64" size="32" placeholder="Име">
 <input id="stNEABEL" type="text" v-model="stNEABEL" size="8" placeholder="0 до 100">
 </div>
 <div class="col-2">
-<input id="stNEABEL_mul" type="range" v-model="stNEABEL_mul" ng-change="mul_change_bel()" min="1" max="3">
+<input id="stNEABEL_mul" type="range" v-model="stNEABEL_mul" @change="mul_change_bel()" min="1" max="3">
 </div>
 <div class="col-2 input-group">
 <span>x</span>
@@ -95,7 +95,7 @@ maxlength="64" size="32" placeholder="Име">
 <input id="stNEAMAT" type="text" v-model="stNEAMAT" size="8" placeholder="0 до 100">
 </div>
 <div class="col-2">
-<input id="stNEAMAT_mul" type="range" v-model="stNEAMAT_mul" ng-change="mul_change_mat()" min="1" max="3">
+<input id="stNEAMAT_mul" type="range" v-model="stNEAMAT_mul" @change="mul_change_mat()" min="1" max="3">
 </div>
 <div class="col-2 input-group">
 <span>x</span>
@@ -146,7 +146,7 @@ maxlength="64" size="32" placeholder="Име">
 
 <div class="row">
 <div class="col text-center">
-<button class="btn btn-primary" :disabled="error || incomplete" ng-click="rankStudent()">&#10004; Класирай</button>
+<button class="btn btn-primary" :disabled="error || incomplete" @click="rankStudent()">&#10004; Класирай</button>
 &nbsp;<button class="btn btn-primary" @click="cancel()">&#10060; Отказ</button>
 </div>
 </div>
@@ -159,7 +159,7 @@ maxlength="64" size="32" placeholder="Име">
 <div class="col text-center">
 <label for="rnkYear">Година:</label>
 <select id="rnkYear" v-model="rnkYear">
-  <option v-for="x in class_ranks_yrs" :value="x">{{ x }}</option>
+  <option v-for="x in cls_ranks_yrs" :value="x">{{ x }}</option>
 </select>
 </div>
 </form>
@@ -174,13 +174,13 @@ maxlength="64" size="32" placeholder="Име">
     <th>Минимален бал I класиране</th>
     <th>Минимален бал II класиране</th>
   </tr>
-  <!--<tr ng-repeat="clrnk in cls_rnks" ng-style="{color: getItemStyle(clrnk) }">
-    <td>{{ clrnk.number   }}</td>
-    <td>{{ clrnk.schlName }}</td>
-    <td>{{ clrnk.clsName  }}</td>
-    <td>{{ clrnk.min_rank_I }}</td>
-    <td>{{ clrnk.min_rank_II }}</td>
-  </tr>//-->
+  <tr v-for="cls_rank in cls_ranks" :style="{color: getItemStyle(cls_rank) }">
+    <td>{{ cls_rank.number   }}</td>
+    <td>{{ cls_rank.schlName }}</td>
+    <td>{{ cls_rank.clsName  }}</td>
+    <td>{{ cls_rank.min_rank_I }}</td>
+    <td>{{ cls_rank.min_rank_II }}</td>
+  </tr>
 </table>
 
 <div class="row">
