@@ -65,7 +65,7 @@
 <label for="stName">Име:</label>
 </div>
 <div class="col-6">
-<input id="stName" type="text" ng-model="stName" ng-disabled="!edit"
+<input id="stName" type="text" v-model="stName" ng-disabled="!edit"
 maxlength="64" size="32" placeholder="Име">
 </div>
 </div>
@@ -76,14 +76,14 @@ maxlength="64" size="32" placeholder="Име">
 <abbr title="Български Език и Литература">БЕЛ</abbr>:</label>
 </div>
 <div class="col-2">
-<input id="stNEABEL" type="text" ng-model="stNEABEL" size="8" placeholder="0 до 100">
+<input id="stNEABEL" type="text" v-model="stNEABEL" size="8" placeholder="0 до 100">
 </div>
 <div class="col-2">
-<input id="stNEABEL_mul" type="range" ng-model="stNEABEL_mul" ng-change="mul_change_bel()" min="1" max="3">
+<input id="stNEABEL_mul" type="range" v-model="stNEABEL_mul" ng-change="mul_change_bel()" min="1" max="3">
 </div>
 <div class="col-2 input-group">
 <span>x</span>
-<input class="form-control-plaintext" type="text" ng-model="stNEABEL_mul" size="2" disabled="disabled">
+<input class="form-control-plaintext" type="text" v-model="stNEABEL_mul" size="2" disabled="disabled">
 </div>
 </div>
 
@@ -92,14 +92,14 @@ maxlength="64" size="32" placeholder="Име">
 <label for="stNEAMAT">Резултат от <abbr title="Национално Външно Оценяване">НВО</abbr> по Математика:</label>
 </div>
 <div class="col-2">
-<input id="stNEAMAT" type="text" ng-model="stNEAMAT" size="8" placeholder="0 до 100">
+<input id="stNEAMAT" type="text" v-model="stNEAMAT" size="8" placeholder="0 до 100">
 </div>
 <div class="col-2">
-<input id="stNEAMAT_mul" type="range" ng-model="stNEAMAT_mul" ng-change="mul_change_mat()" min="1" max="3">
+<input id="stNEAMAT_mul" type="range" v-model="stNEAMAT_mul" ng-change="mul_change_mat()" min="1" max="3">
 </div>
 <div class="col-2 input-group">
 <span>x</span>
-<input class="form-control-plaintext" type="text" ng-model="stNEAMAT_mul" size="2" disabled="disabled">
+<input class="form-control-plaintext" type="text" v-model="stNEAMAT_mul" size="2" disabled="disabled">
 </div>
 </div>
 
@@ -108,7 +108,7 @@ maxlength="64" size="32" placeholder="Име">
 <label for="stSubj1">Оценка предмет №1:</label>
 </div>
 <div class="col-6">
-<input id="stSubj1" type="number" ng-model="stSubj1" min="3" max="6" placeholder="от 3 до 6">
+<input id="stSubj1" type="number" v-model="stSubj1" min="3" max="6" placeholder="от 3 до 6">
 </div>
 </div>
 
@@ -117,7 +117,7 @@ maxlength="64" size="32" placeholder="Име">
 <label for="stSubj2">Оценка предмет №2:</label>
 </div>
 <div class="col-6">
-<input id="stSubj2" type="number" ng-model="stSubj2" min="3" max="6" placeholder="от 3 до 6">
+<input id="stSubj2" type="number" v-model="stSubj2" min="3" max="6" placeholder="от 3 до 6">
 </div>
 </div>
 
@@ -126,7 +126,7 @@ maxlength="64" size="32" placeholder="Име">
 <label for="stRank">Бал:</label>
 </div>
 <div class="col-6">
-<input class="form-control-plaintext" id="stRank" type="text" ng-model="stRank" disabled="disabled">
+<input class="form-control-plaintext" id="stRank" type="text" v-model="stRank" disabled="disabled">
 </div>
 </div>
 
@@ -135,11 +135,11 @@ maxlength="64" size="32" placeholder="Име">
 <label>Класиране по:</label>
 </div>
 <div class="col-6 input-group">
-<p><input name="stRankBy" id="stRankByI" type="radio" ng-model="stRankBy" value="first">
+<p><input name="stRankBy" id="stRankByI" type="radio" v-model="stRankBy" value="first">
 <label for="stRankByI">I класиране</label>&nbsp;
-<input name="stRankBy" id="stRankByII" type="radio" ng-model="stRankBy" value="second">
+<input name="stRankBy" id="stRankByII" type="radio" v-model="stRankBy" value="second">
 <label for="stRankByII">II класиране</label>&nbsp;
-<input name="stRankBy" id="stRankByBoth" type="radio" ng-model="stRankBy" value="both" checked="checked">
+<input name="stRankBy" id="stRankByBoth" type="radio" v-model="stRankBy" value="both" checked="checked">
 <label for="stRankByBoth">двете</label></p>
 </div>
 </div>
