@@ -13,49 +13,54 @@ setup() {
   var stRankBy = Vue.ref('both')
   var rnkYear = Vue.ref(new Date().getFullYear().toString())
 
-  /* For running locally */
-  var cls_ranks_all = [
+  /* For running locally *
+  var cls_ranks_all = Vue.ref([
     {clsYear: "2019", schlName:'Училище 1', clsName:"Клас А", min_rank_I:456, min_rank_II:432 },
     {clsYear: "2019", schlName:'Училище 2', clsName:"Клас Б", min_rank_I:321, min_rank_II:234 },
     {clsYear: "2019", schlName:'Училище 3', clsName:"Клас В", min_rank_I:123, min_rank_II:111 }
-  ]
-  var cls_ranks = Vue.ref(cls_ranks_all)
+  ])
+  var cls_ranks = Vue.ref(cls_ranks_all.value)
 
   var cls_ranks_yrs = Vue.ref(['2018', '2019', '2020', '2021', '2022', '2023', '2024'])
 
   var num = 0
   cls_ranks.value.forEach(function(item) {
     item.number = ++num
-  })
+  })*/
 
-  /*$http.get("get_ranks.php").then(function (response) {
+  var cls_ranks = Vue.ref([])
+  var cls_ranks_all = Vue.ref(null)
+  const cls_ranks_url = Vue.ref("get_ranks.php")
+  var cls_ranks_yrs = Vue.ref([])
+
+  Vue.watchEffect(async () => {
       /* Number rows here, because in MySQL 5.7 Window functions (e.g.
        * ROW_NUMBER) are not available.
-       *
+       */
       var num = 0
-      cls_ranks_all = response.data
-      var prev_yr = cls_ranks_all[0].clsYear
-      angular.forEach(cls_ranks_all, function(item) {
+      cls_ranks_all.value = await (await fetch(`${cls_ranks_url.value}`)).json()
+      var prev_yr = cls_ranks_all.value[0].clsYear
+      cls_ranks_all.value.forEach(function(item) {
         if ( item.clsYear != prev_yr ) {
-          num = 0 /* rest numbering for each year *
+          num = 0 /* rest numbering for each year */
           prev_yr = item.clsYear
         }
         item.number = ++num
         item.src = 'db'
-        if ( cls_ranks_yrs.indexOf(item.clsYear) == -1 ) {
-          cls_ranks_yrs.push(item.clsYear)
+        if ( cls_ranks_yrs.value.indexOf(item.clsYear) == -1 ) {
+          cls_ranks_yrs.value.push(item.clsYear)
         }
       })
 
-      /* More recent years first *
-      cls_ranks_yrs.sort().reverse()
+      /* More recent years first */
+      cls_ranks_yrs.value.sort().reverse()
 
-      rnkYear.value = $7klas.getMaxOfArray(cls_ranks_yrs)
+      rnkYear.value = $7klas.getMaxOfArray(cls_ranks_yrs.value)
 
-      cls_ranks.value = cls_ranks_all.filter(function(item) {
+      cls_ranks.value = cls_ranks_all.value.filter(function(item) {
         return item.clsYear == rnkYear.value
       })
-  })*/
+  })
 
   var edit = Vue.ref(true)
   var error = Vue.ref(false)
@@ -286,7 +291,7 @@ setup() {
   Vue.watch(stSubj2 , function() {verify(); showRank()})
 
   function rnkYearChange() {
-    cls_ranks.value = cls_ranks_all.filter(function(item) {
+    cls_ranks.value = cls_ranks_all.value.filter(function(item) {
       return item.clsYear == rnkYear.value
     })
 
