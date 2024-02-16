@@ -1,2 +1,2 @@
 *.sql linguist-language=SQL linguist-detectable=true
-db/7klas.sql linguist-generated=true
+db/model/7klas.sql linguist-generated=true
