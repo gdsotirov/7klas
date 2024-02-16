@@ -7,15 +7,11 @@
     "outline": {
       
     },
-    "angular1": {
-      
-    },
     "bootstrap": {
       
     }
   },
   "libs": [
-    "browser",
-    "jquery"
+    "browser"
   ]
 }

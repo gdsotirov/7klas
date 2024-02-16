@@ -1,298 +1,328 @@
 /* 7klas Application Controller */
 
-angular.module('7klas_app', []).controller('7klas_ctrl', function($scope, $http) {
-  $scope.stName = '';
-  $scope.stNEABEL = '';
-  $scope.stNEABEL_mul = 1;
-  $scope.stNEAMAT = '';
-  $scope.stNEAMAT_mul = 3;
-  $scope.stSubj1 = '';
-  $scope.stSubj2 = '';
-  $scope.stRank = '';
-  $scope.stRankBy = 'both';
-  $scope.rnkYear = new Date().getFullYear().toString();
+const $7klas_ctrl = {
+setup() {
+  var stName = Vue.ref('')
+  var stNEABEL = Vue.ref('')
+  var stNEABEL_mul = Vue.ref(1)
+  var stNEAMAT = Vue.ref('')
+  var stNEAMAT_mul = Vue.ref(3)
+  var stSubj1 = Vue.ref('')
+  var stSubj2 = Vue.ref('')
+  var stRank = Vue.ref('')
+  var stRankBy = Vue.ref('both')
+  var rnkYear = Vue.ref(new Date().getFullYear().toString())
 
-  $scope.cls_rnks_all = '';
-  $scope.cls_rnks = '';
-  $scope.cls_rnks_yrs = [];
   /* For running locally *
-    $scope.cls_rnks = [
+  var cls_ranks_all = Vue.ref([
     {clsYear: "2019", schlName:'Училище 1', clsName:"Клас А", min_rank_I:456, min_rank_II:432 },
     {clsYear: "2019", schlName:'Училище 2', clsName:"Клас Б", min_rank_I:321, min_rank_II:234 },
     {clsYear: "2019", schlName:'Училище 3', clsName:"Клас В", min_rank_I:123, min_rank_II:111 }
-  ];
+  ])
+  var cls_ranks = Vue.ref(cls_ranks_all.value)
 
-  $scope.cls_rnks_yrs = ["2019"];
+  var cls_ranks_yrs = Vue.ref(['2018', '2019', '2020', '2021', '2022', '2023', '2024'])
 
-  var num = 0;
-  angular.forEach($scope.cls_rnks, function(item) {
-    item.number = ++num;
-  });*/
+  var num = 0
+  cls_ranks.value.forEach(function(item) {
+    item.number = ++num
+  })*/
 
-  $http.get("get_ranks.php").then(function (response) {
+  var cls_ranks = Vue.ref([])
+  var cls_ranks_all = Vue.ref(null)
+  const cls_ranks_url = Vue.ref("get_ranks.php")
+  var cls_ranks_yrs = Vue.ref([])
+
+  Vue.watchEffect(async () => {
       /* Number rows here, because in MySQL 5.7 Window functions (e.g.
        * ROW_NUMBER) are not available.
        */
-      var num = 0;
-      $scope.cls_rnks_all = response.data;
-      var prev_yr = $scope.cls_rnks_all[0].clsYear;
-      angular.forEach($scope.cls_rnks_all, function(item) {
+      var num = 0
+      cls_ranks_all.value = await (await fetch(`${cls_ranks_url.value}`)).json()
+      var prev_yr = cls_ranks_all.value[0].clsYear
+      cls_ranks_all.value.forEach(function(item) {
         if ( item.clsYear != prev_yr ) {
-          num = 0; /* rest numbering for each year */
-          prev_yr = item.clsYear;
+          num = 0 /* rest numbering for each year */
+          prev_yr = item.clsYear
         }
-        item.number = ++num;
-        item.src = 'db';
-        if ( $scope.cls_rnks_yrs.indexOf(item.clsYear) == -1 ) {
-          $scope.cls_rnks_yrs.push(item.clsYear);
+        item.number = ++num
+        item.src = 'db'
+        if ( cls_ranks_yrs.value.indexOf(item.clsYear) == -1 ) {
+          cls_ranks_yrs.value.push(item.clsYear)
         }
-      });
+      })
 
       /* More recent years first */
-      $scope.cls_rnks_yrs.sort().reverse();
+      cls_ranks_yrs.value.sort().reverse()
 
-      $scope.rnkYear = $7klas.getMaxOfArray($scope.cls_rnks_yrs);
+      rnkYear.value = $7klas.getMaxOfArray(cls_ranks_yrs.value)
 
-      $scope.cls_rnks = $scope.cls_rnks_all.filter(function(item) {
-        return item.clsYear == $scope.rnkYear;
-      });
-  });
+      cls_ranks.value = cls_ranks_all.value.filter(function(item) {
+        return item.clsYear == rnkYear.value
+      })
+  })
 
-  $scope.edit = true;
-  $scope.error = false;
-  $scope.incomplete = false;
-  $scope.hideform = true;
+  var edit = Vue.ref(true)
+  var error = Vue.ref(false)
+  var incomplete = Vue.ref(true)
+  var showForm = Vue.ref(false)
 
-  $scope.addStudent = function() {
-    $scope.hideform = false;
+  function addStudent() {
+    showForm.value = true
 
-    $scope.edit = true;
+    edit.value = true
 
-    $scope.incomplete = true;
-    if ($scope.edit             &&
-        $scope.stName.length    &&
-        $scope.stNEABEL.length  &&
-        $scope.stNEAMAT.length  &&
-        $scope.stSubj1 !== null &&
-        $scope.stSubj2 !== null
+    incomplete.value = true
+    if (edit             &&
+        stName.value.length    &&
+        stNEABEL.value.length  &&
+        stNEAMAT.value.length  &&
+        stSubj1.value !== null &&
+        stSubj2.value !== null
        )
     {
-      $scope.incomplete = false;
+      incomplete.value = false
     }
-  };
-
-  $scope.calcRank = function(bel, bmul, mat, mmul, subj1, subj2) {
-    var rank = (bmul * bel) + (mmul * mat) +
-               $7klas.mark_to_score(subj1) + $7klas.mark_to_score(subj2);
-    return rank;
-  };
-
-  $scope.showRank = function() {
-    var scBEL, scMAT;
-    if ( $scope.stNEABEL == '' || isNaN($scope.stNEABEL) ) {
-      scBEL = 0;
-    }
-    else {
-      scBEL = parseFloat($scope.stNEABEL);
-    }
-
-    if ( $scope.stNEAMAT == '' || isNaN($scope.stNEAMAT) ) {
-      scMAT = 0;
-    }
-    else {
-      scMAT = parseFloat($scope.stNEAMAT);
-    }
-
-    $scope.stRank = $scope.calcRank(scBEL, $scope.stNEABEL_mul,
-                                    scMAT, $scope.stNEAMAT_mul,
-                                    $scope.stSubj1, $scope.stSubj2);
   }
 
-  $scope.rankStudent = function() {
-    $scope.hideform = true;
+  function calcRank(bel, bmul, mat, mmul, subj1, subj2) {
+    var rank = (bmul * bel) + (mmul * mat) +
+               $7klas.mark_to_score(subj1) + $7klas.mark_to_score(subj2)
+    return rank
+  }
 
-    var student_ranked = false;
-    var rank_by = 0;
-    var new_arr = [];
-    var new_item = {};
+  function showRank() {
+    var scBEL, scMAT
+    if ( stNEABEL.value == '' || isNaN(stNEABEL.value) ) {
+      scBEL = 0
+    }
+    else {
+      scBEL = parseFloat(stNEABEL.value)
+    }
+
+    if ( stNEAMAT.value == '' || isNaN(stNEAMAT.value) ) {
+      scMAT = 0
+    }
+    else {
+      scMAT = parseFloat(stNEAMAT.value)
+    }
+
+    stRank.value = calcRank(scBEL, stNEABEL_mul.value,
+                            scMAT, stNEAMAT_mul.value,
+                            stSubj1.value, stSubj2.value)
+  }
+
+  function rankStudent() {
+    showForm.value = false
+
+    var student_ranked = false
+    var rank_by = 0
+    var new_arr = []
+    var new_item = {}
 
     /* Initialize with student's data */
-    new_item.schlName = $scope.stName;
-    new_item.clsName  = 'n/a';
-    if ( $scope.stRankBy == 'first' || $scope.stRankBy == 'both' ) {
-      new_item.min_rank_I = $scope.stRank;
-      new_item.min_rank_II = 0.0;
+    new_item.schlName = stName.value
+    new_item.clsName  = 'n/a'
+    if ( stRankBy.value == 'first' || stRankBy.value == 'both' ) {
+      new_item.min_rank_I = stRank.value
+      new_item.min_rank_II = 0.0
     }
-    else if ( $scope.stRankBy == 'second' ) {
-      new_item.min_rank_I = 0.0;
-      new_item.min_rank_II = $scope.stRank;
+    else if ( stRankBy.value == 'second' ) {
+      new_item.min_rank_I = 0.0
+      new_item.min_rank_II = stRank.value
     }
 
-    var num = 0;
-    angular.forEach($scope.cls_rnks, function(item) {
-      if ( $scope.stRankBy == 'first' || $scope.stRankBy == 'both' ) {
-        rank_by = parseFloat(item.min_rank_I);
+    var num = 0
+    cls_ranks.value.forEach(function(item) {
+      if ( stRankBy.value == 'first' || stRankBy.value == 'both' ) {
+        rank_by = parseFloat(item.min_rank_I)
       }
       else {
-        rank_by = parseFloat(item.min_rank_II);
+        rank_by = parseFloat(item.min_rank_II)
       }
 
-      if ( $scope.stRank >= rank_by && !student_ranked ) {
-        student_ranked = true;
-        if ( $scope.stRankBy == 'both' ) {
-          new_item.schlName += " (I)";
+      if ( stRank.value >= rank_by && !student_ranked ) {
+        student_ranked = true
+        if ( stRankBy.value == 'both' ) {
+          new_item.schlName += " (I)"
         }
-        new_item.number = '--';
-        new_item.clsName = item.clsName;
-        new_item.source = 'user';
-        new_arr.push(new_item);
-        item.number = ++num;
-        new_arr.push(item);
+        new_item.number = '--'
+        new_item.clsName = item.clsName
+        new_item.source = 'user'
+        new_arr.push(new_item)
+        item.number = ++num
+        new_arr.push(item)
       }
       else if ( item.source == 'user' ) { /* just push user items */
-        new_arr.push(item);
+        new_arr.push(item)
       }
       else {
-        item.number = ++num;
-        new_arr.push(item);
+        item.number = ++num
+        new_arr.push(item)
       }
-    });
+    })
 
     /* Loop again to rank by second ranks */
-    if ( $scope.stRankBy == 'both' )
+    if ( stRankBy.value == 'both' )
     {
-      $scope.cls_rnks = new_arr;
+      cls_ranks.value = new_arr
 
-      var new_item2 = {};
-      new_item2.schlName = $scope.stName + " (II)";
-      new_item2.clsName  = 'n/a';
-      new_item2.min_rank_I = 0.0;
-      new_item2.min_rank_II = $scope.stRank;
+      var new_item2 = {}
+      new_item2.schlName = stName.value + " (II)"
+      new_item2.clsName  = 'n/a'
+      new_item2.min_rank_I = 0.0
+      new_item2.min_rank_II = stRank.value
 
-      new_arr = [];
-      student_ranked = false;
-      num = 0;
+      new_arr = []
+      student_ranked = false
+      num = 0
 
-      angular.forEach($scope.cls_rnks, function(item) {
-        if ( $scope.stRank >= parseFloat(item.min_rank_II)
+      cls_ranks.value.forEach(function(item) {
+        if ( stRank.value >= parseFloat(item.min_rank_II)
              && !student_ranked
              && item.source != 'user' /* avoid previous ranking */ )
         {
-          student_ranked = true;
-          new_item2.number = '--';
-          new_item2.clsName = item.clsName;
-          new_item2.source = 'user';
-          new_arr.push(new_item2);
-          item.number = ++num;
-          new_arr.push(item);
+          student_ranked = true
+          new_item2.number = '--'
+          new_item2.clsName = item.clsName
+          new_item2.source = 'user'
+          new_arr.push(new_item2)
+          item.number = ++num
+          new_arr.push(item)
         }
         else if ( item.source == 'user' ) {  /* just push user items */
-          new_arr.push(item);
+          new_arr.push(item)
         }
         else {
-          item.number = ++num;
-          new_arr.push(item);
+          item.number = ++num
+          new_arr.push(item)
         }
-      });
+      })
     }
 
     /* Add at the very end if not ranked higher */
     if ( !student_ranked ) {
-      new_item.number = ++num;
-      new_arr.push(new_item);
+      new_item.number = ++num
+      new_arr.push(new_item)
     }
 
-    $scope.cls_rnks = new_arr;
-  };
+    cls_ranks.value = new_arr
+  }
 
-  $scope.cancel = function() {
-    $scope.hideform = true;
-  };
+  function cancel() {
+    showForm.value = true
+  }
 
   /* Verify user input */
-  $scope.verify = function() {
-    $scope.error = false;
+  function verify() {
+    error.value = false
     /* Name should have value */
-    if ( $scope.stName == "" ) {
-      $scope.error = true;
+    if ( stName.value == "" ) {
+      error.value = true
     }
 
     /* Score should be between 0 and 100 */
-    if ( parseFloat($scope.stNEABEL) < 0.0 || parseFloat($scope.stNEABEL) > 100.0 ) {
-      $scope.error = true;
+    if ( parseFloat(stNEABEL.value) < 0.0 || parseFloat(stNEABEL.value) > 100.0 ) {
+      error.value = true
     }
 
     /* Score should be between 0 and 100 */
-    if ( parseFloat($scope.stNEAMAT) < 0.0 || parseFloat($scope.stNEAMAT) > 100.0 ) {
-      $scope.error = true;
+    if ( parseFloat(stNEAMAT.value) < 0.0 || parseFloat(stNEAMAT.value) > 100.0 ) {
+      error.value = true
     }
 
     /* Mark is between 3 and 6 */
-    if ( $scope.stSubj1 < 3 || $scope.stSubj1 > 6 ) {
-      $scope.error = true;
+    if ( stSubj1.value < 3 || stSubj1.value > 6 ) {
+      error.value = true
     }
 
     /* Mark i between 3 and 6 */
-    if ( $scope.stSubj2 < 3 || $scope.stSubj2 > 6 ) {
-      $scope.error = true;
+    if ( stSubj2.value < 3 || stSubj2.value > 6 ) {
+      error.value = true
     }
 
-    $scope.incomplete = false;
-    if ( $scope.edit             &&
-        (!$scope.stName.length   ||
-         !$scope.stNEABEL.length ||
-         !$scope.stNEAMAT.length ||
-         $scope.stSubj1 == null  ||
-         $scope.stSubj2 == null
+    incomplete.value = false
+    if ( edit.value             &&
+        (!stName.value.length   ||
+         !stNEABEL.value.length ||
+         !stNEAMAT.value.length ||
+         stSubj1.value == null  ||
+         stSubj2.value == null
         )
        )
     {
-      $scope.incomplete = true;
+      incomplete.value = true
     }
-  };
-
-  $scope.mul_change_bel = function () {
-    $scope.stNEAMAT_mul = 4 - $scope.stNEABEL_mul;
-    $scope.showRank();
   }
 
-  $scope.mul_change_mat = function () {
-    $scope.stNEABEL_mul = 4 - $scope.stNEAMAT_mul;
-    $scope.showRank();
+  function mul_change_bel() {
+    stNEAMAT_mul.value = 4 - stNEABEL_mul.value
+    showRank()
   }
 
-  $scope.getItemStyle = function(itm) {
+  function mul_change_mat() {
+    stNEABEL_mul.value = 4 - stNEAMAT_mul.value
+    showRank()
+  }
+
+  function getItemStyle(itm) {
     if ( itm.source == 'user' ) {
-      return "red";
+      return "red"
     }
     else {
-      return "inherit";
+      return "inherit"
     }
   }
 
-  $scope.$watch('stName'  ,function() {$scope.verify();});
-  $scope.$watch('stNEABEL',function(newVal) {
+  Vue.watch(stName  , verify)
+  Vue.watch(stNEABEL, function(newVal) {
     /* Ensure comma is replaced with dot as decimal separator */
-    $scope.stNEABEL = newVal.replace(/,/g, '.');
-    $scope.verify();
-    $scope.showRank();
-  });
-  $scope.$watch('stNEAMAT',function(newVal) {
+    stNEABEL.value = newVal.replace(/,/g, '.')
+    verify()
+    showRank()
+  })
+  Vue.watch(stNEAMAT, function(newVal) {
     /* Ensure comma is replaced with dot as decimal separator */
-    $scope.stNEAMAT = newVal.replace(/,/g, '.');
-    $scope.verify();
-    $scope.showRank();
-  });
-  $scope.$watch('stSubj1' ,function() {$scope.verify(); $scope.showRank();});
-  $scope.$watch('stSubj2' ,function() {$scope.verify(); $scope.showRank();});
+    stNEAMAT.value = newVal.replace(/,/g, '.')
+    verify()
+    showRank()
+  })
+  Vue.watch(stSubj1 , function() {verify(); showRank()})
+  Vue.watch(stSubj2 , function() {verify(); showRank()})
 
-  $scope.rnkYearChange = function() {
-    $scope.cls_rnks = $scope.cls_rnks_all.filter(function(item) {
-      return item.clsYear == $scope.rnkYear;
-    });
+  function rnkYearChange() {
+    cls_ranks.value = cls_ranks_all.value.filter(function(item) {
+      return item.clsYear == rnkYear.value
+    })
 
-    if ( !$scope.error && !$scope.incomplete ) {
-      $scope.rankStudent();
+    if ( !error.value && !incomplete.value ) {
+      rankStudent()
     }
-  };
-});
+  }
+
+  return {
+    addStudent,
+    cancel,
+    cls_ranks,
+    cls_ranks_yrs,
+    edit,
+    error,
+    getItemStyle,
+    incomplete,
+    mul_change_bel,
+    mul_change_mat,
+    rankStudent,
+    rnkYear,
+    rnkYearChange,
+    showForm,
+    stNEABEL,
+    stNEABEL_mul,
+    stNEAMAT,
+    stNEAMAT_mul,
+    stName,
+    stRank,
+    stRankBy,
+    stSubj1,
+    stSubj2
+  }
+}}

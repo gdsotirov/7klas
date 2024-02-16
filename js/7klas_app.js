@@ -1,3 +1,3 @@
 /* 7klas Application */
 
-var app = angular.module('7klas_app', []);
+Vue.createApp($7klas_ctrl).mount('#a7klas_app')

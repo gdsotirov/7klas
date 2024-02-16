@@ -18,13 +18,13 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="alternate stylesheet" title="Bootstrap 4"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
-<script src="js/7klas_utl.js"></script>
-<script src="js/7klas_app.js"></script>
-<script src="js/7klas_ctrl.js"></script>
+<script defer src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script defer src="js/7klas_ctrl.js"></script>
+<script defer src="js/7klas_utl.js"></script>
+<script defer src="js/7klas_app.js"></script>
 </head>
 
-<body ng-app="7klas_app" ng-controller="7klas_ctrl">
+<body>
 
 <nav class="navbar navbar-default navbar-expand bg-primary navbar-dark navbar-fixed-top fixed-top">
 <ul class="nav navbar-nav">
@@ -34,7 +34,7 @@
 </ul>
 </nav>
 
-<div class="container">
+<div class="container" id="a7klas_app">
 
 <h1 id="top">Къде след 7<sup>ми</sup> клас?</h1>
 
@@ -49,14 +49,14 @@
 
 <div class="row">
 <div class="col text-center">
-<button class="btn btn-primary" ng-click="addStudent()">&#10133; Добавяне на ученик</button>
+<button class="btn btn-primary" @click="addStudent()">&#10133; Добавяне на ученик</button>
 </div>
 </div>
 
-<form ng-hide="hideform">
+<form v-show="showForm" @submit.prevent>
 <div class="row">
 <div class="col">
-<h2 ng-show="edit">Данни за ученика</h2>
+<h2 v-show="edit">Данни за ученика</h2>
 </div>
 </div>
 
@@ -65,7 +65,7 @@
 <label for="stName">Име:</label>
 </div>
 <div class="col-6">
-<input id="stName" type="text" ng-model="stName" ng-disabled="!edit"
+<input :disabled="!edit" id="stName" type="text" v-model="stName"
 maxlength="64" size="32" placeholder="Име">
 </div>
 </div>
@@ -76,14 +76,14 @@ maxlength="64" size="32" placeholder="Име">
 <abbr title="Български Език и Литература">БЕЛ</abbr>:</label>
 </div>
 <div class="col-2">
-<input id="stNEABEL" type="text" ng-model="stNEABEL" size="8" placeholder="0 до 100">
+<input id="stNEABEL" type="text" v-model="stNEABEL" size="8" placeholder="0 до 100">
 </div>
 <div class="col-2">
-<input id="stNEABEL_mul" type="range" ng-model="stNEABEL_mul" ng-change="mul_change_bel()" min="1" max="3">
+<input id="stNEABEL_mul" type="range" v-model="stNEABEL_mul" @change="mul_change_bel()" min="1" max="3">
 </div>
 <div class="col-2 input-group">
 <span>x</span>
-<input class="form-control-plaintext" type="text" ng-model="stNEABEL_mul" size="2" disabled="disabled">
+<input class="form-control-plaintext" type="text" v-model="stNEABEL_mul" size="2" disabled="disabled">
 </div>
 </div>
 
@@ -92,14 +92,14 @@ maxlength="64" size="32" placeholder="Име">
 <label for="stNEAMAT">Резултат от <abbr title="Национално Външно Оценяване">НВО</abbr> по Математика:</label>
 </div>
 <div class="col-2">
-<input id="stNEAMAT" type="text" ng-model="stNEAMAT" size="8" placeholder="0 до 100">
+<input id="stNEAMAT" type="text" v-model="stNEAMAT" size="8" placeholder="0 до 100">
 </div>
 <div class="col-2">
-<input id="stNEAMAT_mul" type="range" ng-model="stNEAMAT_mul" ng-change="mul_change_mat()" min="1" max="3">
+<input id="stNEAMAT_mul" type="range" v-model="stNEAMAT_mul" @change="mul_change_mat()" min="1" max="3">
 </div>
 <div class="col-2 input-group">
 <span>x</span>
-<input class="form-control-plaintext" type="text" ng-model="stNEAMAT_mul" size="2" disabled="disabled">
+<input class="form-control-plaintext" type="text" v-model="stNEAMAT_mul" size="2" disabled="disabled">
 </div>
 </div>
 
@@ -108,7 +108,7 @@ maxlength="64" size="32" placeholder="Име">
 <label for="stSubj1">Оценка предмет №1:</label>
 </div>
 <div class="col-6">
-<input id="stSubj1" type="number" ng-model="stSubj1" min="3" max="6" placeholder="от 3 до 6">
+<input id="stSubj1" type="number" v-model="stSubj1" min="3" max="6" placeholder="от 3 до 6">
 </div>
 </div>
 
@@ -117,7 +117,7 @@ maxlength="64" size="32" placeholder="Име">
 <label for="stSubj2">Оценка предмет №2:</label>
 </div>
 <div class="col-6">
-<input id="stSubj2" type="number" ng-model="stSubj2" min="3" max="6" placeholder="от 3 до 6">
+<input id="stSubj2" type="number" v-model="stSubj2" min="3" max="6" placeholder="от 3 до 6">
 </div>
 </div>
 
@@ -126,7 +126,7 @@ maxlength="64" size="32" placeholder="Име">
 <label for="stRank">Бал:</label>
 </div>
 <div class="col-6">
-<input class="form-control-plaintext" id="stRank" type="text" ng-model="stRank" disabled="disabled">
+<input class="form-control-plaintext" id="stRank" type="text" v-model="stRank" disabled="disabled">
 </div>
 </div>
 
@@ -135,19 +135,19 @@ maxlength="64" size="32" placeholder="Име">
 <label>Класиране по:</label>
 </div>
 <div class="col-6 input-group">
-<p><input name="stRankBy" id="stRankByI" type="radio" ng-model="stRankBy" value="first">
+<p><input name="stRankBy" id="stRankByI" type="radio" v-model="stRankBy" value="first">
 <label for="stRankByI">I класиране</label>&nbsp;
-<input name="stRankBy" id="stRankByII" type="radio" ng-model="stRankBy" value="second">
+<input name="stRankBy" id="stRankByII" type="radio" v-model="stRankBy" value="second">
 <label for="stRankByII">II класиране</label>&nbsp;
-<input name="stRankBy" id="stRankByBoth" type="radio" ng-model="stRankBy" value="both" checked="checked">
+<input name="stRankBy" id="stRankByBoth" type="radio" v-model="stRankBy" value="both" checked="checked">
 <label for="stRankByBoth">двете</label></p>
 </div>
 </div>
 
 <div class="row">
 <div class="col text-center">
-<button class="btn btn-primary" ng-click="rankStudent()" ng-disabled="error || incomplete">&#10004; Класирай</button>
-<button class="btn btn-primary" ng-click="cancel()">&#10060; Отказ</button>
+<button class="btn btn-primary" :disabled="error || incomplete" @click="rankStudent()">&#10004; Класирай</button>
+&nbsp;<button class="btn btn-primary" @click="cancel()">&#10060; Отказ</button>
 </div>
 </div>
 </form>
@@ -158,7 +158,8 @@ maxlength="64" size="32" placeholder="Име">
 <form>
 <div class="col text-center">
 <label for="rnkYear">Година:</label>
-<select id="rnkYear" ng-model="rnkYear" ng-change="rnkYearChange()" ng-options="x for x in cls_rnks_yrs track by x">
+<select id="rnkYear" @change="rnkYearChange()" v-model="rnkYear">
+  <option v-for="x in cls_ranks_yrs" :value="x">{{ x }}</option>
 </select>
 </div>
 </form>
@@ -173,12 +174,12 @@ maxlength="64" size="32" placeholder="Име">
     <th>Минимален бал I класиране</th>
     <th>Минимален бал II класиране</th>
   </tr>
-  <tr ng-repeat="clrnk in cls_rnks" ng-style="{color: getItemStyle(clrnk) }">
-    <td>{{ clrnk.number   }}</td>
-    <td>{{ clrnk.schlName }}</td>
-    <td>{{ clrnk.clsName  }}</td>
-    <td>{{ clrnk.min_rank_I  | number : 2 }}</td>
-    <td>{{ clrnk.min_rank_II | number : 2 }}</td>
+  <tr v-for="cls_rank in cls_ranks" :style="{color: getItemStyle(cls_rank) }">
+    <td>{{ cls_rank.number   }}</td>
+    <td>{{ cls_rank.schlName }}</td>
+    <td>{{ cls_rank.clsName  }}</td>
+    <td>{{ cls_rank.min_rank_I }}</td>
+    <td>{{ cls_rank.min_rank_II }}</td>
   </tr>
 </table>
 
@@ -206,7 +207,7 @@ target="_blank">страницата</a> на <abbr title="Регионално 
 <hr />
 <p class="text-center">
 <a href="https://github.com/gdsotirov/7klas" target="_blank">Страница на проекта</a></p>
-<p class="copy">Автор &copy; 2019-2023 Георги Д. Сотиров<br />
+<p class="copy">Автор &copy; 2019-2024 Георги Д. Сотиров<br />
 Това приложение се разпространява под
 <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL версия 3.0</a> лиценз.</p>
 </footer>
