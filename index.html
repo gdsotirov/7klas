@@ -178,8 +178,8 @@ maxlength="64" size="32" placeholder="Име">
     <td>{{ cls_rank.number   }}</td>
     <td>{{ cls_rank.schlName }}</td>
     <td>{{ cls_rank.clsName  }}</td>
-    <td>{{ cls_rank.min_rank_I }}</td>
-    <td>{{ cls_rank.min_rank_II }}</td>
+    <td>{{ Number(cls_rank.min_rank_I).toFixed(2) }}</td>
+    <td>{{ Number(cls_rank.min_rank_II).toFixed(2) }}</td>
   </tr>
 </table>
 
