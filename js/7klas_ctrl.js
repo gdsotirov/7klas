@@ -64,7 +64,7 @@ setup() {
 
   var edit = Vue.ref(true)
   var error = Vue.ref(false)
-  var incomplete = Vue.ref(false)
+  var incomplete = Vue.ref(true)
   var showForm = Vue.ref(false)
 
   function addStudent() {
