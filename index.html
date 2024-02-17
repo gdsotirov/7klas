@@ -65,80 +65,80 @@
 </div>
 
 <div class="row">
-<div class="col-6 text-right">
+<div class="col-6 col-md-6 text-right">
 <label for="stName">Име:</label>
 </div>
-<div class="col-6">
+<div class="col-6 col-md-6">
 <input :disabled="!edit" id="stName" type="text" v-model="stName"
 maxlength="64" size="32" placeholder="Име">
 </div>
 </div>
 
 <div class="row">
-<div class="col-6 text-right">
+<div class="col-6 col-md-6 text-right">
 <label for="stNEABEL">Резултат от <abbr title="Национално Външно Оценяване">НВО</abbr> по
 <abbr title="Български Език и Литература">БЕЛ</abbr>:</label>
 </div>
-<div class="col-2">
+<div class="col-2 col-md-2">
 <input id="stNEABEL" type="text" v-model="stNEABEL" size="8" placeholder="0 до 100">
 </div>
-<div class="col-2">
+<div class="col-2 col-md-2">
 <input id="stNEABEL_mul" type="range" v-model="stNEABEL_mul" @change="mul_change_bel()" min="1" max="3">
 </div>
-<div class="col-2 input-group">
+<div class="col-2 col-md-2 input-group">
 <span>x</span>
 <input class="form-control-plaintext" type="text" v-model="stNEABEL_mul" size="2" disabled="disabled">
 </div>
 </div>
 
 <div class="row">
-<div class="col-6 text-right">
+<div class="col-6 col-md-6 text-right">
 <label for="stNEAMAT">Резултат от <abbr title="Национално Външно Оценяване">НВО</abbr> по Математика:</label>
 </div>
-<div class="col-2">
+<div class="col-2 col-md-2">
 <input id="stNEAMAT" type="text" v-model="stNEAMAT" size="8" placeholder="0 до 100">
 </div>
-<div class="col-2">
+<div class="col-2 col-md-2">
 <input id="stNEAMAT_mul" type="range" v-model="stNEAMAT_mul" @change="mul_change_mat()" min="1" max="3">
 </div>
-<div class="col-2 input-group">
+<div class="col-2 col-md-2 input-group">
 <span>x</span>
 <input class="form-control-plaintext" type="text" v-model="stNEAMAT_mul" size="2" disabled="disabled">
 </div>
 </div>
 
 <div class="row">
-<div class="col-6 text-right">
+<div class="col-6 col-md-6 text-right">
 <label for="stSubj1">Оценка предмет №1:</label>
 </div>
-<div class="col-6">
+<div class="col-6 col-md-6">
 <input id="stSubj1" type="number" v-model="stSubj1" min="3" max="6" placeholder="от 3 до 6">
 </div>
 </div>
 
 <div class="row">
-<div class="col-6 text-right">
+<div class="col-6 col-md-6 text-right">
 <label for="stSubj2">Оценка предмет №2:</label>
 </div>
-<div class="col-6">
+<div class="col-6 col-md-6">
 <input id="stSubj2" type="number" v-model="stSubj2" min="3" max="6" placeholder="от 3 до 6">
 </div>
 </div>
 
 <div class="row">
-<div class="col-6 text-right">
+<div class="col-6 col-md-6 text-right">
 <label for="stRank">Бал:</label>
 </div>
-<div class="col-6">
+<div class="col-6 col-md-6">
 <input class="form-control-plaintext" id="stRank" type="text" v-model="stRank" disabled="disabled">
 </div>
 </div>
 
 <div class="row">
-<div class="col-6 text-right">
+<div class="col-6 col-md-6 text-right">
 <label>Класиране по:</label>
 </div>
-<div class="col-6 input-group">
+<div class="col-6 col-md-6 input-group">
 <p><input name="stRankBy" id="stRankByI" type="radio" v-model="stRankBy" value="first">
 <label for="stRankByI">I класиране</label>&nbsp;
 <input name="stRankBy" id="stRankByII" type="radio" v-model="stRankBy" value="second">
