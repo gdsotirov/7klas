@@ -1,6 +1,6 @@
 {
   "name": "7klas",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Where after 7th grade?",
   "keywords": [
     "7th grade",
@@ -11,7 +11,7 @@
   "author": "Georgi D. Sotirov",
   "contributors": [],
   "bugs": {
-    "url": "https://sotirov-bg.net/bugzilla/"
+    "url": "https://github.com/gdsotirov/7klas/issues"
   },
   "repository": {
     "type": "git",
