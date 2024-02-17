@@ -18,6 +18,7 @@
     "url": "https://github.com/gdsotirov/7klas.git"
   },
   "dependencies": {
+    "bootstrap": "4.6.2",
     "vue": "^3"
   }
 }
