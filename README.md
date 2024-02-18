@@ -10,6 +10,8 @@ The application could be rendered with [Bootstrap 3](https://getbootstrap.com/do
 and [Bootstrap 5](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
 thus showcasing use of alternative styles on the same page.
 
+You could use the application at [https://sotirov-bg.net/apps/7klas/](https://sotirov-bg.net/apps/7klas/).
+
 # Database model
 
 ![7klas Model](db/model/7klas.png)
