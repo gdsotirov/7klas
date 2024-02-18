@@ -16,6 +16,6 @@ thus showcasing use of alternative styles on the same page.
 
 # Requirements
 
-The database is designed for and requires [MySQL](https://www.mysql.com/) 5.7
-or higher. The web application requires [Vue.js](https://vuejs.org/) 3
+The database is designed for and requires [MySQL](https://www.mysql.com/) 8.0.2
+or newer. The web application requires [Vue.js](https://vuejs.org/) 3
 or newer and optionally [Bootstrap](https://getbootstrap.com/) 3 or newer.

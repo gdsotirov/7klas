@@ -21,12 +21,7 @@ setup() {
   ])
   var cls_ranks = Vue.ref(cls_ranks_all.value)
 
-  var cls_ranks_yrs = Vue.ref(['2018', '2019', '2020', '2021', '2022', '2023', '2024'])
-
-  var num = 0
-  cls_ranks.value.forEach(function(item) {
-    item.number = ++num
-  })*/
+  var cls_ranks_yrs = Vue.ref(['2018', '2019', '2020', '2021', '2022', '2023', '2024']) */
 
   var cls_ranks = Vue.ref([])
   var cls_ranks_all = Vue.ref(null)
@@ -34,18 +29,8 @@ setup() {
   var cls_ranks_yrs = Vue.ref([])
 
   Vue.watchEffect(async () => {
-      /* Number rows here, because in MySQL 5.7 Window functions (e.g.
-       * ROW_NUMBER) are not available.
-       */
-      var num = 0
       cls_ranks_all.value = await (await fetch(`${cls_ranks_url.value}`)).json()
-      var prev_yr = cls_ranks_all.value[0].clsYear
       cls_ranks_all.value.forEach(function(item) {
-        if ( item.clsYear != prev_yr ) {
-          num = 0 /* rest numbering for each year */
-          prev_yr = item.clsYear
-        }
-        item.number = ++num
         item.src = 'db'
         if ( cls_ranks_yrs.value.indexOf(item.clsYear) == -1 ) {
           cls_ranks_yrs.value.push(item.clsYear)
@@ -132,7 +117,6 @@ setup() {
       new_item.min_rank_II = stRank.value
     }
 
-    var num = 0
     cls_ranks.value.forEach(function(item) {
       if ( stRankBy.value == 'first' || stRankBy.value == 'both' ) {
         rank_by = parseFloat(item.min_rank_I)
@@ -146,18 +130,16 @@ setup() {
         if ( stRankBy.value == 'both' ) {
           new_item.schlName += " (I)"
         }
-        new_item.number = '--'
+        new_item.rnkNum = '--'
         new_item.clsName = item.clsName
         new_item.source = 'user'
         new_arr.push(new_item)
-        item.number = ++num
         new_arr.push(item)
       }
       else if ( item.source == 'user' ) { /* just push user items */
         new_arr.push(item)
       }
       else {
-        item.number = ++num
         new_arr.push(item)
       }
     })
@@ -175,7 +157,6 @@ setup() {
 
       new_arr = []
       student_ranked = false
-      num = 0
 
       cls_ranks.value.forEach(function(item) {
         if ( stRank.value >= parseFloat(item.min_rank_II)
@@ -183,18 +164,16 @@ setup() {
              && item.source != 'user' /* avoid previous ranking */ )
         {
           student_ranked = true
-          new_item2.number = '--'
+          new_item2.rnkNum = '--'
           new_item2.clsName = item.clsName
           new_item2.source = 'user'
           new_arr.push(new_item2)
-          item.number = ++num
           new_arr.push(item)
         }
         else if ( item.source == 'user' ) {  /* just push user items */
           new_arr.push(item)
         }
         else {
-          item.number = ++num
           new_arr.push(item)
         }
       })
@@ -202,7 +181,6 @@ setup() {
 
     /* Add at the very end if not ranked higher */
     if ( !student_ranked ) {
-      new_item.number = ++num
       new_arr.push(new_item)
     }
 

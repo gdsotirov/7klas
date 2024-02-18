@@ -1,9 +1,12 @@
 CREATE OR REPLACE VIEW ClassRanks AS
-SELECT CAST(CR.yr AS CHAR(4)) clsYear,
-       CONCAT(SC.id, ' ', SC.short_name) schlName,
-       CONCAT(LPAD(CL.id, 4, '0'), ' ', CL.`name`)     clsName,
-       CR.min_rank_I,
-       CR.min_rank_II
+SELECT ROW_NUMBER() OVER(
+         PARTITION BY CR.yr
+         ORDER BY CR.yr, CR.min_rank_II DESC)       AS rnkNum,
+       CAST(CR.yr AS CHAR(4))                       AS clsYear,
+       CONCAT(SC.id, ' ', SC.short_name)            AS schlName,
+       CONCAT(LPAD(CL.id, 4, '0'), ' ', CL.`name`)  AS clsName,
+       CR.min_rank_I                                AS min_rank_I,
+       CR.min_rank_II                               AS min_rank_II
   FROM classes        CL,
        class_rankings CR,
        schools        SC
