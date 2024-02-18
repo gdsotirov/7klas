@@ -40,7 +40,7 @@ setup() {
       /* More recent years first */
       cls_ranks_yrs.value.sort().reverse()
 
-      rnkYear.value = $7klas.getMaxOfArray(cls_ranks_yrs.value)
+      rnkYear.value = $7klas_utl.getMaxOfArray(cls_ranks_yrs.value)
 
       cls_ranks.value = cls_ranks_all.value.filter(function(item) {
         return item.clsYear == rnkYear.value
@@ -72,7 +72,7 @@ setup() {
 
   function calcRank(bel, bmul, mat, mmul, subj1, subj2) {
     var rank = (bmul * bel) + (mmul * mat) +
-               $7klas.mark_to_score(subj1) + $7klas.mark_to_score(subj2)
+               $7klas_utl.mark_to_score(subj1) + $7klas_utl.mark_to_score(subj2)
     return rank
   }
 

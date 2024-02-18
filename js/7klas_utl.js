@@ -1,6 +1,6 @@
 /* 7klas utility functions */
 
-var $7klas = {}
+var $7klas_utl = {}
 
 /**
  * Round to given number of places
@@ -8,7 +8,7 @@ var $7klas = {}
  * @param places Places to round to
  * @returns Number rounded
  */
-$7klas.round = function (number, places) {
+$7klas_utl.round = function (number, places) {
   return Math.round(number * Math.pow(10, places)) / Math.pow(10, places);
 }
 
@@ -17,7 +17,7 @@ $7klas.round = function (number, places) {
  * @param mark Mark in six-point marking system
  * @returns Scores
  */
-$7klas.mark_to_score = function (mark) {
+$7klas_utl.mark_to_score = function (mark) {
   var score;
 
   if ( isNaN(mark) ) {
@@ -40,7 +40,7 @@ $7klas.mark_to_score = function (mark) {
  * @param score Scores from exam
  * @returns Mark in six-point marking system
  */
-$7klas.score_to_mark = function (score) {
+$7klas_utl.score_to_mark = function (score) {
   var mark;
 
   if ( isNaN(score) ) {
@@ -55,7 +55,7 @@ $7klas.score_to_mark = function (score) {
     mark = 2.0;
   }
   else {
-    mark = $7klas.round((score + 68)/28, 3);
+    mark = this.round((score + 68)/28, 3);
   }
 
   return mark;
@@ -64,7 +64,7 @@ $7klas.score_to_mark = function (score) {
 /**
  * Filter only unique items in an array
  */
-$7klas.unique_items = function (value, index, self) {
+$7klas_utl.unique_items = function (value, index, self) {
   return self.indexOf(value) === index;
 }
 
@@ -72,7 +72,7 @@ $7klas.unique_items = function (value, index, self) {
  * Get the maximum element of a numeric array
  * See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max#getting_the_maximum_element_of_an_array
  */
-$7klas.getMaxOfArray = function (numArray) {
+$7klas_utl.getMaxOfArray = function (numArray) {
   return Math.max.apply(null, numArray);
 }
 
