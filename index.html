@@ -31,6 +31,8 @@
 <script defer src="js/7klas_ctrl.js"></script>
 <script defer src="js/7klas_utl.js"></script>
 <script defer src="js/7klas_app.js"></script>
+<!-- Following style has SHA256 ky1vNDEhXAiA+SwTw9ePEpd+zAT/z8uPcWf1Yw5+J5c= -->
+<style>input.borderless { border: none !important }</style>
 </head>
 
 <body>
@@ -92,7 +94,7 @@ maxlength="64" size="32" placeholder="Име">
 </div>
 <div class="col-2 col-md-2 input-group">
 <span>x</span>
-<input class="form-control-plaintext" disabled="disabled" size="2" style="border: none !important" type="text" v-model="stNEABEL_mul">
+<input class="borderless form-control-plaintext" disabled="disabled" size="2" type="text" v-model="stNEABEL_mul">
 </div>
 </div>
 
@@ -108,7 +110,7 @@ maxlength="64" size="32" placeholder="Име">
 </div>
 <div class="col-2 col-md-2 input-group">
 <span>x</span>
-<input class="form-control-plaintext" disabled="disabled" size="2" style="border: none !important" type="text" v-model="stNEAMAT_mul">
+<input class="borderless form-control-plaintext" disabled="disabled" size="2" type="text" v-model="stNEAMAT_mul">
 </div>
 </div>
 
@@ -135,7 +137,7 @@ maxlength="64" size="32" placeholder="Име">
 <label for="stRank">Бал:</label>
 </div>
 <div class="col-6 col-md-6">
-<input class="form-control-plaintext" disabled="disabled" id="stRank" style="border: none !important" type="text" v-model="stRank">
+<input class="borderless form-control-plaintext" disabled="disabled" id="stRank" type="text" v-model="stRank">
 </div>
 </div>
 

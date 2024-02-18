@@ -7,6 +7,6 @@ object-src 'none'; \
 report-uri /csp_report.php; \
 require-trusted-types-for 'script'; \
 script-src 'self' https://unpkg.com; \
-style-src 'self' https://cdn.jsdelivr.net"
+style-src 'self' 'sha256-ky1vNDEhXAiA+SwTw9ePEpd+zAT/z8uPcWf1Yw5+J5c=' https://cdn.jsdelivr.net"
 </IfModule>
 
