@@ -6,7 +6,7 @@ font-src 'self' https://maxcdn.bootstrapcdn.com; \
 object-src 'none'; \
 report-uri /csp_report.php; \
 require-trusted-types-for 'script'; \
-script-src script-src 'self' https://unpkg.com; \
+script-src 'self' https://unpkg.com; \
 style-src 'self' https://cdn.jsdelivr.net"
 </IfModule>
 
