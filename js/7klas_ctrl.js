@@ -227,12 +227,12 @@ setup() {
     }
   }
 
-  function mul_change_bel() {
+  function changeMulBel() {
     stNEAMAT_mul.value = 4 - stNEABEL_mul.value
     showRank()
   }
 
-  function mul_change_mat() {
+  function changeMulMat() {
     stNEABEL_mul.value = 4 - stNEAMAT_mul.value
     showRank()
   }
@@ -281,14 +281,14 @@ setup() {
   return {
     addStudent,
     cancel,
+    changeMulBel,
+    changeMulMat,
     cls_ranks,
     cls_ranks_yrs,
     edit,
     error,
     getItemStyle,
     incomplete,
-    mul_change_bel,
-    mul_change_mat,
     rankStudent,
     rnkYear,
     rnkYearChange,
