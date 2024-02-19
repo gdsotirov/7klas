@@ -186,7 +186,7 @@ setup() {
   }
 
   /* Verify user input */
-  function verify() {
+  function verifyInputs() {
     error.value = false
     /* Name should have value */
     if ( stName.value == "" ) {
@@ -250,17 +250,23 @@ setup() {
   Vue.watch(stNEABEL, function(newVal) {
     /* Ensure comma is replaced with dot as decimal separator */
     stNEABEL.value = newVal.replace(/,/g, '.')
-    verify()
+    verifyInputs()
     showRank()
   })
   Vue.watch(stNEAMAT, function(newVal) {
     /* Ensure comma is replaced with dot as decimal separator */
     stNEAMAT.value = newVal.replace(/,/g, '.')
-    verify()
+    verifyInputs()
     showRank()
   })
-  Vue.watch(stSubj1 , function() {verify(); showRank()})
-  Vue.watch(stSubj2 , function() {verify(); showRank()})
+  Vue.watch(stSubj1 , function() {
+    verifyInputs()
+    showRank()
+  })
+  Vue.watch(stSubj2 , function() {
+    verifyInputs()
+    showRank()
+  })
 
   function rnkYearChange() {
     cls_ranks.value = cls_ranks_all.value.filter(function(item) {
