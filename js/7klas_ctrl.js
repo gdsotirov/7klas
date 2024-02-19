@@ -73,7 +73,7 @@ setup() {
   function calcRank(bel, b_mul, mat, m_mul, subj1, subj2) {
     var rank = (b_mul * bel) + (m_mul * mat) +
                $7klas_utl.mark_to_score(subj1) + $7klas_utl.mark_to_score(subj2)
-    return rank
+    return $7klas_utl.round(rank, 2)
   }
 
   function showRank() {
