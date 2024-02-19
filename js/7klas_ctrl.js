@@ -136,10 +136,7 @@ setup() {
         new_arr.push(new_item)
         new_arr.push(item)
       }
-      else if ( item.source == 'user' ) { /* just push user items */
-        new_arr.push(item)
-      }
-      else {
+      else { /* just push other items */
         new_arr.push(item)
       }
     })
@@ -170,10 +167,7 @@ setup() {
           new_arr.push(new_item2)
           new_arr.push(item)
         }
-        else if ( item.source == 'user' ) {  /* just push user items */
-          new_arr.push(item)
-        }
-        else {
+        else { /* just push other items */
           new_arr.push(item)
         }
       })
