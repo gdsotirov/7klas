@@ -246,6 +246,16 @@ setup() {
     }
   }
 
+  function rnkYearChange() {
+    cls_ranks.value = cls_ranks_all.value.filter(function(item) {
+      return item.clsYear == rnkYear.value
+    })
+
+    if ( !error.value && !incomplete.value ) {
+      rankStudent()
+    }
+  }
+
   Vue.watch(stName  , verify)
   Vue.watch(stNEABEL, function(newVal) {
     /* Ensure comma is replaced with dot as decimal separator */
@@ -267,16 +277,6 @@ setup() {
     verifyInputs()
     showRank()
   })
-
-  function rnkYearChange() {
-    cls_ranks.value = cls_ranks_all.value.filter(function(item) {
-      return item.clsYear == rnkYear.value
-    })
-
-    if ( !error.value && !incomplete.value ) {
-      rankStudent()
-    }
-  }
 
   return {
     addStudent,
