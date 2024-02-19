@@ -256,7 +256,7 @@ setup() {
     }
   }
 
-  Vue.watch(stName  , verify)
+  Vue.watch(stName  , verifyInputs())
   Vue.watch(stNEABEL, function(newVal) {
     /* Ensure comma is replaced with dot as decimal separator */
     stNEABEL.value = newVal.replace(/,/g, '.')
