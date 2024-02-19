@@ -70,8 +70,8 @@ setup() {
     }
   }
 
-  function calcRank(bel, bmul, mat, mmul, subj1, subj2) {
-    var rank = (bmul * bel) + (mmul * mat) +
+  function calcRank(bel, b_mul, mat, m_mul, subj1, subj2) {
+    var rank = (b_mul * bel) + (m_mul * mat) +
                $7klas_utl.mark_to_score(subj1) + $7klas_utl.mark_to_score(subj2)
     return rank
   }
