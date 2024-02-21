@@ -52,6 +52,9 @@ setup() {
   var incomplete = Vue.ref(true)
   var showForm = Vue.ref(false)
 
+  /**
+   * Shows form for adding student and checks whether information is complete
+   */
   function addStudent() {
     showForm.value = true
 
@@ -70,12 +73,25 @@ setup() {
     }
   }
 
+  /**
+   * Calculates student's rank from available information
+   * @param bel Result from NEA on BEL
+   * @param b_mul Multiplier for BEL
+   * @param mat Result from NEA on Mathematics
+   * @param m_mul Multiplier for Mathematics
+   * @param subj1 Mark for subject 1
+   * @param subj2 Mark for subject 2
+   * @returns Calculated rank rounded to 2 decimal digits
+   */
   function calcRank(bel, b_mul, mat, m_mul, subj1, subj2) {
     var rank = (b_mul * bel) + (m_mul * mat) +
                $7klas_utl.mark_to_score(subj1) + $7klas_utl.mark_to_score(subj2)
     return $7klas_utl.round(rank, 2)
   }
 
+  /**
+   * Updates calculated student's rank
+   */
   function showRank() {
     var scBEL, scMAT
     if ( stNEABEL.value == '' || isNaN(stNEABEL.value) ) {
@@ -97,6 +113,9 @@ setup() {
                             stSubj1.value, stSubj2.value)
   }
 
+  /**
+   * Ranks student among available class ranks
+   */
   function rankStudent() {
     showForm.value = false
 
@@ -181,11 +200,17 @@ setup() {
     cls_ranks.value = new_arr
   }
 
+  /**
+   * Hides form for adding student
+   */
   function cancel() {
     showForm.value = true
   }
 
-  /* Verify user input */
+  /**
+   * Verifies user input to ensure correct values and sets error if problems
+   * are found
+   */
   function verifyInputs() {
     error.value = false
     /* Name should have value */
@@ -208,7 +233,7 @@ setup() {
       error.value = true
     }
 
-    /* Mark i between 3 and 6 */
+    /* Mark is between 3 and 6 */
     if ( stSubj2.value < 3 || stSubj2.value > 6 ) {
       error.value = true
     }
@@ -227,11 +252,17 @@ setup() {
     }
   }
 
+  /**
+   * Recalculates multiplier for MAT when multiplier for BEL changes
+   */
   function changeMulBel() {
     stNEAMAT_mul.value = 4 - stNEABEL_mul.value
     showRank()
   }
 
+  /**
+   * Recalculates multiplier for BEL when multiplier for MAT changes
+   */
   function changeMulMat() {
     stNEABEL_mul.value = 4 - stNEAMAT_mul.value
     showRank()
@@ -246,6 +277,9 @@ setup() {
     }
   }
 
+  /**
+   * Updates class ranks when year changes
+   */
   function rnkYearChange() {
     cls_ranks.value = cls_ranks_all.value.filter(function(item) {
       return item.clsYear == rnkYear.value
