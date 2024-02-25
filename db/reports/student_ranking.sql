@@ -1,8 +1,8 @@
 SELECT ST.`name`, SC.short_name, CL.`name`, DS.`name`,
        CL.coef_bel * ST.score_nea_bel +
        CL.coef_mat * ST.score_nea_mat +
-       mark_to_score(SUBJ1.mark) +
-       mark_to_score(SUBJ2.mark) total_score,
+       markToScore(SUBJ1.mark) +
+       markToScore(SUBJ2.mark) total_score,
        CR.min_rank_I,
        CR.min_rank_II
   FROM classes        CL,
@@ -33,6 +33,6 @@ SELECT ST.`name`, SC.short_name, CL.`name`, DS.`name`,
    AND ST.id = 1
  /*AND CL.coef_bel * ST.score_nea_bel +
        CL.coef_mat * ST.score_nea_mat +
-       mark_to_score(SUBJ1.mark) +
-       mark_to_score(SUBJ2.mark) >= CR.min_rank_II */
+       markToScore(SUBJ1.mark) +
+       markToScore(SUBJ2.mark) >= CR.min_rank_II */
  ORDER BY CR.min_rank_II DESC;
