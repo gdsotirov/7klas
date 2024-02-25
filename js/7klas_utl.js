@@ -17,7 +17,7 @@ $7klas_utl.round = function (number, places) {
  * @param mark Mark in six-point marking system
  * @returns Scores
  */
-$7klas_utl.mark_to_score = function (mark) {
+$7klas_utl.markToScore = function (mark) {
   var score;
 
   if ( isNaN(mark) ) {
@@ -40,7 +40,7 @@ $7klas_utl.mark_to_score = function (mark) {
  * @param score Scores from exam
  * @returns Mark in six-point marking system
  */
-$7klas_utl.score_to_mark = function (score) {
+$7klas_utl.scoreToMark = function (score) {
   var mark;
 
   if ( isNaN(score) ) {
