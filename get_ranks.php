@@ -5,10 +5,10 @@ header("Content-Type: application/json; charset=UTF-8");
 $conn = new mysqli("localhost", "7klas_app", "7klas.APP", "7klas");
 
 $rnk_yr = "";
-if ( is_numeric($_REQUEST["yr"]) ) {
+if ( isset($_REQUEST["yr"]) && is_numeric($_REQUEST["yr"]) ) {
   $rnk_yr = $_REQUEST["yr"];
 }
-elseif ( count($argv) > 1 && is_numeric($argv[1]) ) {
+elseif ( isset($argv) && count($argv) > 1 && is_numeric($argv[1]) ) {
   $rnk_yr = $argv[1];
 }
 
