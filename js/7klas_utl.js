@@ -17,19 +17,37 @@ $7klas_utl.round = function (number, places) {
  * @param mark Mark in six-point marking system
  * @returns Scores
  */
-$7klas_utl.markToScore = function (mark) {
+$7klas_utl.markToScore = function (mark, year = new Date().getFullYear()) {
   var score;
 
   if ( isNaN(mark) ) {
     throw "Mark is NOT a number!";
   }
 
-  switch(Math.round(mark)) {
-      case 6: score = 50; break;
-      case 5: score = 39; break;
-      case 4: score = 26; break;
-      case 3: score = 15; break;
-      default: score = 0;
+  if ( year <= 2021 ) {
+    switch(Math.round(mark)) {
+        case 6: score = 50; break;
+        case 5: score = 39; break;
+        case 4: score = 26; break;
+        case 3: score = 15; break;
+        default: score = 0;
+    }
+  }
+  else {
+    if ( mark == 6.00 )                { score = 50; } else
+    if ( mark >= 5.67 && mark < 6.00 ) { score = 47; } else
+    if ( mark >= 5.50 && mark < 5.67 ) { score = 44; } else
+    if ( mark >= 5.33 && mark < 5.50 ) { score = 41; } else
+    if ( mark >= 5.00 && mark < 5.33 ) { score = 39; } else
+    if ( mark >= 4.67 && mark < 5.00 ) { score = 36; } else
+    if ( mark >= 4.50 && mark < 4.67 ) { score = 32; } else
+    if ( mark >= 4.33 && mark < 4.50 ) { score = 29; } else
+    if ( mark >= 4.00 && mark < 4.33 ) { score = 26; } else
+    if ( mark >= 3.67 && mark < 4.00 ) { score = 23; } else
+    if ( mark >= 3.50 && mark < 3.67 ) { score = 20; } else
+    if ( mark >= 3.33 && mark < 3.50 ) { score = 17; } else
+    if ( mark >= 3.00 && mark < 3.33 ) { score = 15; }
+    else                               { score = 0;  }
   }
 
   return score;
