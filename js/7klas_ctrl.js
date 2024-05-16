@@ -4,9 +4,9 @@ const $7klas_ctrl = {
 setup() {
   var stName = Vue.ref('')
   var stNEABEL = Vue.ref('')
-  var stNEABEL_mul = Vue.ref(1)
+  var stNEABEL_mul = Vue.ref(2)
   var stNEAMAT = Vue.ref('')
-  var stNEAMAT_mul = Vue.ref(3)
+  var stNEAMAT_mul = Vue.ref(2)
   var stSubj1 = Vue.ref('')
   var stSubj2 = Vue.ref('')
   var stRank = Vue.ref('')
