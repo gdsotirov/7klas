@@ -29,7 +29,7 @@ SELECT r1.yr, r1.school_id, r1.class_id, r1.class_name
    AND r1.school_id = r2.school_id
    AND r1.class_id  = r2.class_id
 ON DUPLICATE KEY
-  UPDATE `name`    = r1.class_name;
+  UPDATE `name` = r1.class_name;
 
 INSERT INTO class_rankings
   (yr, class_id, min_rank_I, min_rank_II, max_rank_I, max_rank_II)
@@ -38,12 +38,12 @@ SELECT r1.yr, r1.class_id,
        r2.min_rank AS `min_rank_II`,
        r1.max_rank AS `max_rank_I`,
        r2.max_rank AS `max_rank_II`
-  FROM min_max_1_in  r1
+  FROM min_max_1_in r1
        LEFT OUTER JOIN
        min_max_2_in r2
-       ON r1.yr = r2.yr
-      AND r1.school_id = r2.school_id
-      AND r1.class_id = r2.class_id
+    ON r1.yr        = r2.yr
+   AND r1.school_id = r2.school_id
+   AND r1.class_id  = r2.class_id
 ON DUPLICATE KEY
   UPDATE min_rank_I   = min_rank_I,
          min_rank_II  = min_rank_II,
