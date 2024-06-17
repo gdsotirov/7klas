@@ -11,7 +11,7 @@ DELETE FROM 7klas.subjects WHERE 1=1;
 LOAD DATA INFILE '/var/mysql/files/subjects.csv'
   INTO TABLE 7klas.subjects
   CHARACTER SET utf8mb4
-  FIELDS TERMINATED BY ';'
+  FIELDS TERMINATED BY ','
     OPTIONALLY ENCLOSED BY '"'
   LINES TERMINATED BY '\n'
   IGNORE 1 LINES
@@ -20,7 +20,7 @@ LOAD DATA INFILE '/var/mysql/files/subjects.csv'
 LOAD DATA INFILE '/var/mysql/files/classes.csv'
   INTO TABLE 7klas.classes
   CHARACTER SET utf8mb4
-  FIELDS TERMINATED BY ';'
+  FIELDS TERMINATED BY ','
     OPTIONALLY ENCLOSED BY '"'
   LINES TERMINATED BY '\n'
   IGNORE 1 LINES
@@ -28,7 +28,7 @@ LOAD DATA INFILE '/var/mysql/files/classes.csv'
 
 LOAD DATA INFILE '/var/mysql/files/class_rankings.csv'
   INTO TABLE 7klas.class_rankings
-  FIELDS TERMINATED BY ';'
+  FIELDS TERMINATED BY ','
     OPTIONALLY ENCLOSED BY '"'
   LINES TERMINATED BY '\n'
   IGNORE 1 LINES
