@@ -120,8 +120,9 @@ setup() {
   function rankStudent() {
     showForm.value = false
 
+    var first_sorted = []
+    var first_rank_class = 'n/a'
     var student_ranked = false
-    var rank_by = 0
     var new_arr = []
     var new_item = {}
 
@@ -137,37 +138,50 @@ setup() {
       new_item.min_rank_II = stRank.value
     }
 
-    cls_ranks.value.forEach(function(item) {
-      if ( stRankBy.value == 'first' || stRankBy.value == 'both' ) {
-        rank_by = parseFloat(item.min_rank_I)
-      }
-      else {
-        rank_by = parseFloat(item.min_rank_II)
-      }
+    if ( stRankBy.value == 'first' || stRankBy.value == 'both' ) {
+      /* copy ranks and sort by first ranking... */
+      cls_ranks.value.forEach(function(item) {
+        first_sorted.push(item)
+      })
+      first_sorted.sort(function(a, b){return a.min_rank_I - b.min_rank_I}).reverse()
 
-      if ( stRank.value >= rank_by && !student_ranked ) {
-        student_ranked = true
-        if ( stRankBy.value == 'both' ) {
-          new_item.schlName += " (I)"
+      /* ...and find student rank in sorted list */
+      first_sorted.some(function(item) {
+        first_rank_class = item.clsName
+        return ( item.source != 'user' && stRank.value >= parseFloat(item.min_rank_I) );
+      })
+
+      cls_ranks.value.forEach(function(item) {
+        if ( item.clsName == first_rank_class && !student_ranked ) {
+          student_ranked = true
+          if ( stRankBy.value == 'both' ) {
+            new_item.schlName += " (I)"
+          }
+          new_item.rnkNum = '--'
+          new_item.clsName = item.clsName
+          new_item.source = 'user'
+          new_arr.push(new_item)
+          new_arr.push(item)
         }
-        new_item.rnkNum = '--'
-        new_item.clsName = item.clsName
-        new_item.source = 'user'
-        new_arr.push(new_item)
-        new_arr.push(item)
-      }
-      else { /* just push other items */
-        new_arr.push(item)
-      }
-    })
+        else { /* just push other items */
+          new_arr.push(item)
+        }
+      })
+    }
+    else {
+      new_arr = cls_ranks.value
+    }
 
     /* Loop again to rank by second ranks */
-    if ( stRankBy.value == 'both' )
+    if ( stRankBy.value == 'second' || stRankBy.value == 'both' )
     {
       cls_ranks.value = new_arr
 
       var new_item2 = {}
-      new_item2.schlName = stName.value + " (II)"
+      new_item2.schlName = stName.value
+      if ( stRankBy.value == 'both' ) {
+        new_item2.schlName += " (II)"
+      }
       new_item2.clsName  = 'n/a'
       new_item2.min_rank_I = 0.0
       new_item2.min_rank_II = stRank.value
