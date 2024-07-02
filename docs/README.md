@@ -4,6 +4,9 @@ This project uses some external documents. The minimum and maximum rankings
 are taken from the site of [RUO Sofia Grad](https://ruo-sofia-grad.com/)
 as follows:
 
+* 2024:
+  - Classes list from 2024-06-27: [direct lik](https://ruo-sofia-grad.com/wp-content/uploads/2024/06/za_saita_kodove_baloobr_2024_2025.xlsx),
+  [sofia-20240627-classes.xlsx](sofia-20240627-classes.xlsx);
 * 2023:
   - Classes list from 2023-06-21: [direct lik](https://ruo-sofia-grad.com/wp-content/uploads/2023/07/Za_saita_s_kodove_baloobrazuvane_2023-12.xlsx),
   [sofia-20230621-classes.xlsx](sofia-20230621-classes.xlsx);
