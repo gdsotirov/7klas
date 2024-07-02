@@ -180,6 +180,7 @@ maxlength="64" size="32" placeholder="Име">
 <table class="table table-striped">
   <tr>
     <th>№</th>
+    <th>Район</th>
     <th>Училище</th>
     <th>Паралелка</th>
     <th>Минимален бал I класиране</th>
@@ -187,6 +188,7 @@ maxlength="64" size="32" placeholder="Име">
   </tr>
   <tr v-for="cls_rank in cls_ranks" :style="{color: getItemStyle(cls_rank) }">
     <td>{{ cls_rank.rnkNum   }}</td>
+    <td>{{ cls_rank.schlDist }}</td>
     <td>{{ cls_rank.schlName }}</td>
     <td>{{ cls_rank.clsName  }}</td>
     <td>{{ Number(cls_rank.min_rank_I).toFixed(2) }}</td>
