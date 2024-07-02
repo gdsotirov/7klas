@@ -192,9 +192,9 @@ maxlength="64" size="32" placeholder="Име">
   </tr>
   <tr v-for="cls_rank in cls_ranks" :style="{color: getItemStyle(cls_rank) }">
     <td>{{ cls_rank.rnkNum   }}</td>
-    <td>{{ cls_rank.schlDist }}</td>
-    <td>{{ cls_rank.schlName }}</td>
-    <td>{{ cls_rank.clsName  }}</td>
+    <td>{{ cls_rank.schlDistId }} {{ cls_rank.schlDistName }}</td>
+    <td>{{ cls_rank.schlId }} {{ cls_rank.schlName }}</td>
+    <td>{{ String(cls_rank.clsId).padStart(4, '0') }} {{ cls_rank.clsName  }}</td>
     <td>{{ Number(cls_rank.min_rank_I).toFixed(2) }}</td>
     <td>{{ Number(cls_rank.min_rank_II).toFixed(2) }}</td>
   </tr>
