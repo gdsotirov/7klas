@@ -11,6 +11,7 @@ setup() {
   var stSubj2 = Vue.ref('')
   var stRank = Vue.ref('')
   var stRankBy = Vue.ref('both')
+  var schlDist = Vue.ref([])
   var rnkYear = Vue.ref(new Date().getFullYear().toString())
 
   /* For running locally *
@@ -26,9 +27,13 @@ setup() {
   var cls_ranks = Vue.ref([])
   var cls_ranks_all = Vue.ref(null)
   const cls_ranks_url = Vue.ref("get_ranks.php")
+  const sch_dist_url  = Vue.ref("get_dist.php")
   var cls_ranks_yrs = Vue.ref([])
+  var districts = Vue.ref([])
 
   Vue.watchEffect(async () => {
+      districts.value = await (await fetch(`${sch_dist_url.value}`)).json()
+
       cls_ranks_all.value = await (await fetch(`${cls_ranks_url.value}`)).json()
       cls_ranks_all.value.forEach(function(item) {
         item.src = 'db'
@@ -293,11 +298,14 @@ setup() {
   }
 
   /**
-   * Updates class ranks when year changes
+   * Updates class ranks when a filter changes
    */
-  function rnkYearChange() {
+  function filterChange() {
     cls_ranks.value = cls_ranks_all.value.filter(function(item) {
-      return item.clsYear == rnkYear.value
+      return (
+        item.clsYear == rnkYear.value
+        && ( schlDist.value.length === 0 || schlDist.value.includes(Number(item.schlDist.split(' ')[0])) )
+      )
     })
 
     if ( !error.value && !incomplete.value ) {
@@ -334,13 +342,15 @@ setup() {
     changeMulMat,
     cls_ranks,
     cls_ranks_yrs,
+    districts,
     edit,
     error,
+    filterChange,
     getItemStyle,
     incomplete,
     rankStudent,
     rnkYear,
-    rnkYearChange,
+    schlDist,
     showForm,
     stNEABEL,
     stNEABEL_mul,
