@@ -25,4 +25,8 @@
     text-align: center;
     font-style: italic;
   }
+
+  select#schlDist {
+    width: 9em;
+  }
 }

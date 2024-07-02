@@ -169,8 +169,12 @@ maxlength="64" size="32" placeholder="Име">
 <form>
 <div class="col text-center">
 <label for="rnkYear">Година:</label>
-<select id="rnkYear" @change="rnkYearChange()" v-model="rnkYear">
+<select id="rnkYear" @change="filterChange()" v-model="rnkYear">
   <option v-for="x in cls_ranks_yrs" :value="x">{{ x }}</option>
+</select>
+<label for="schlDist">Район(и):</label>
+<select id="schlDist" @change="filterChange()" v-model="schlDist" multiple size="3" width="120">
+  <option v-for="x in districts" :value="x.distId">{{ x.distName }}</option>
 </select>
 </div>
 </form>
