@@ -304,7 +304,7 @@ setup() {
     cls_ranks.value = cls_ranks_all.value.filter(function(item) {
       return (
         item.clsYear == rnkYear.value
-        && ( schlDist.value.length === 0 || schlDist.value.includes(Number(item.schlDist.split(' ')[0])) )
+        && ( schlDist.value.length === 0 || schlDist.value.includes(item.schlDistId) )
       )
     })
 
