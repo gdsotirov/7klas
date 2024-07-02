@@ -163,6 +163,7 @@ setup() {
             new_item.schlName += " (I)"
           }
           new_item.rnkNum = '--'
+          new_item.clsId = item.clsId
           new_item.clsName = item.clsName
           new_item.source = 'user'
           new_arr.push(new_item)
@@ -201,6 +202,7 @@ setup() {
         {
           student_ranked = true
           new_item2.rnkNum = '--'
+          new_item2.clsId = item.clsId
           new_item2.clsName = item.clsName
           new_item2.source = 'user'
           new_arr.push(new_item2)
