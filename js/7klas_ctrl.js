@@ -226,7 +226,7 @@ setup() {
    * Hides form for adding student
    */
   function cancel() {
-    showForm.value = true
+    showForm.value = false
   }
 
   /**
