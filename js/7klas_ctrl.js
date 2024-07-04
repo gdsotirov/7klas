@@ -132,7 +132,7 @@ setup() {
     var new_item = {}
 
     /* Initialize with student's data */
-    new_item.schlName = stName.value
+    new_item.schlDistName = stName.value
     new_item.clsName  = 'n/a'
     if ( stRankBy.value == 'first' || stRankBy.value == 'both' ) {
       new_item.min_rank_I = stRank.value
@@ -160,9 +160,11 @@ setup() {
         if ( item.clsName == first_rank_class && !student_ranked ) {
           student_ranked = true
           if ( stRankBy.value == 'both' ) {
-            new_item.schlName += " (I)"
+            new_item.schlDistName += " (I)"
           }
           new_item.rnkNum = '--'
+          new_item.schlId = item.schlId
+          new_item.schlName = item.schlName
           new_item.clsId = item.clsId
           new_item.clsName = item.clsName
           new_item.source = 'user'
@@ -184,9 +186,9 @@ setup() {
       cls_ranks.value = new_arr
 
       var new_item2 = {}
-      new_item2.schlName = stName.value
+      new_item2.schlDistName = stName.value
       if ( stRankBy.value == 'both' ) {
-        new_item2.schlName += " (II)"
+        new_item2.schlDistName += " (II)"
       }
       new_item2.clsName  = 'n/a'
       new_item2.min_rank_I = 0.0
@@ -202,6 +204,8 @@ setup() {
         {
           student_ranked = true
           new_item2.rnkNum = '--'
+          new_item2.schlId = item.schlId
+          new_item2.schlName = item.schlName
           new_item2.clsId = item.clsId
           new_item2.clsName = item.clsName
           new_item2.source = 'user'
