@@ -152,12 +152,12 @@ setup() {
 
       /* ...and find student rank in sorted list */
       first_sorted.some(function(item) {
-        first_rank_class = item.clsName
+        first_rank_class = item.clsId
         return ( item.source != 'user' && stRank.value >= parseFloat(item.min_rank_I) );
       })
 
       cls_ranks.value.forEach(function(item) {
-        if ( item.clsName == first_rank_class && !student_ranked ) {
+        if ( item.clsId == first_rank_class && !student_ranked ) {
           student_ranked = true
           if ( stRankBy.value == 'both' ) {
             new_item.schlDistName += " (I)"
