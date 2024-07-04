@@ -144,6 +144,14 @@
     left: 0;
   }
 
+  select[multiple] {
+    vertical-align: middle;
+  }
+
+  table {
+    margin-top: 0.5em;
+  }
+
   table, table.table, table.table-striped {
     border-collapse: collapse;
     border-spacing: 0;
