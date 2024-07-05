@@ -165,7 +165,8 @@ maxlength="64" size="32" placeholder="Име">
 
 <div class="row">
 <div class="col">
-<h2 id="ranking">Класиране по минимален бал</h2>
+<h2 id="ranking">Класиране по минимален бал за {{ rnkYear }}</h2>
+<h3 v-if="schlDist.length">в район(и) {{ schlDistStr }}</h3>
 <form>
 <div class="col text-center">
 <label for="rnkYear">Година:</label>
