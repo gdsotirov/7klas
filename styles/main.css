@@ -82,7 +82,7 @@
   div.row::before { content: ""; display: table }
   div.row::after { content: ""; clear: both }
 
-  h1, h2 {
+  h1, h2, h3 {
     font-weight: 400;
     font-family: "Segoe UI", Arial, sans-serif;
     margin: 10px 0;
