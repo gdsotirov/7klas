@@ -12,6 +12,7 @@ setup() {
   var stRank = Vue.ref('')
   var stRankBy = Vue.ref('both')
   var schlDist = Vue.ref([])
+  var schlDistStr = Vue.ref('')
   var rnkYear = Vue.ref(new Date().getFullYear().toString())
 
   /* For running locally *
@@ -314,6 +315,10 @@ setup() {
       )
     })
 
+    schlDistStr.value = districts.value.filter(function(item) {
+      return schlDist.value.includes(item.distId)
+    }).map(function(item) { return item.distName }).join(", ")
+
     if ( !error.value && !incomplete.value ) {
       rankStudent()
     }
@@ -357,6 +362,7 @@ setup() {
     rankStudent,
     rnkYear,
     schlDist,
+    schlDistStr,
     showForm,
     stNEABEL,
     stNEABEL_mul,
