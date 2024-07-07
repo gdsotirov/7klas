@@ -166,6 +166,7 @@ setup() {
           new_item.rnkNum = '--'
           new_item.schlId = item.schlId
           new_item.schlName = item.schlName
+          new_item.schlFullName = item.schlFullName
           new_item.clsId = item.clsId
           new_item.clsName = item.clsName
           new_item.source = 'user'
@@ -207,6 +208,7 @@ setup() {
           new_item2.rnkNum = '--'
           new_item2.schlId = item.schlId
           new_item2.schlName = item.schlName
+          new_item2.schlFullName = item.schlFullName
           new_item2.clsId = item.clsId
           new_item2.clsName = item.clsName
           new_item2.source = 'user'
