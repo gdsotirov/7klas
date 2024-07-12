@@ -1,8 +1,11 @@
 /* Load min and max rankings from official CSV files and update data */
 
+TRUNCATE TABLE min_max_1_in;
+TRUNCATE TABLE min_max_2_in;
+
 START TRANSACTION;
 
-LOAD DATA INFILE '/var/mysql/files/sofia-20230712-minmax.csv'
+LOAD DATA INFILE '/var/mysql/files/sofia-20240712-minmax.csv'
   INTO TABLE 7klas.min_max_1_in
   CHARACTER SET utf8mb4
   FIELDS TERMINATED BY ';'
@@ -11,7 +14,7 @@ LOAD DATA INFILE '/var/mysql/files/sofia-20230712-minmax.csv'
   IGNORE 1 LINES
   (yr, school_id, class_id, class_name, min_rank, max_rank);
 
-LOAD DATA INFILE '/var/mysql/files/sofia-20230719-minmax.csv'
+LOAD DATA INFILE '/var/mysql/files/sofia-20240712-minmax.csv'
   INTO TABLE 7klas.min_max_2_in
   CHARACTER SET utf8mb4
   FIELDS TERMINATED BY ';'
