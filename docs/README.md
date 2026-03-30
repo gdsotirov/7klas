@@ -4,6 +4,15 @@ This project uses some external documents. The minimum and maximum rankings
 are taken from the site of [RUO Sofia Grad](https://ruo.mon.bg/sofia-grad)
 as follows:
 
+* 2025:
+  - Classes list from 2025-06-24: [direct like](https://ruo.mon.bg/files/sites/2/2025/06/za_saita_s_kodove_i-_baloobrazuvane_2025.xlsx),
+  [sofia-20250624-classes.xlsx](sofia-20250624-classes.xlsx);
+  - I ranking from 2025-07-14: [direct link](https://ruo.mon.bg/files/sites/2/2025/07/za_saita_min_max_1kl_2025.xlsx),
+  [sofia-20250714-minmax.xlsx](sofia-20250714-minmax.xlsx);
+  - II ranking from 2025-07-21: [direct link](https://ruo.mon.bg/files/sites/2/2025/07/za_saita_min_max_2_klasirane_2025.xlsx),
+  [sofia-20250721-minmax.xlsx](sofia-20250721-minmax.xlsx);
+  - III ranking from 2025-07-30: [direct link](https://ruo.mon.bg/files/sites/2/2025/07/za_saita_min_max_3_klasirane_2025.xlsx),
+  [sofia-20250730-minmax.xlsx](sofia-20250730-minmax.xlsx);
 * 2024:
   - Classes list from 2024-06-27: [direct lik](https://ruo.mon.bg/files/sites/2/2024/06/za_saita_kodove_baloobr_2024_2025.xlsx),
   [sofia-20240627-classes.xlsx](sofia-20240627-classes.xlsx);
